@@ -3,3 +3,7 @@
     border-radius: 0.3rem;
   }
 }
+
+.move-up {
+  margin-top: -15rem; /* Adjust this value to move the title higher or lower */
+}
