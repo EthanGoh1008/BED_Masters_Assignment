@@ -24,7 +24,52 @@ const getRecipesById = async (req, res) => {
   }
 };
 
+const createRecipe = async (req, res) => {
+  const newRecipe = req.body;
+  try {
+    const createdRecipe = await Recipe.createRecipe(newRecipe);
+    res.status(201).json(createdRecipe);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error creating recipe");
+  }
+};
+
+const updateRecipe = async (req, res) => {
+  const recipeId = parseInt(req.params.id);
+  const newRecipeData = req.body;
+
+  try {
+    const updatedRecipe = await Recipe.updateRecipe(recipeId, newRecipeData);
+    if (!updatedRecipe) {
+      return res.status(404).send("Recipe not found");
+    }
+    res.json(updatedRecipe);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error updating recipe");
+  }
+};
+
+const deleteRecipe = async (req, res) => {
+  const recipeId = parseInt(req.params.id);
+
+  try {
+    const success = await Recipe.deleteRecipe(recipeId);
+    if (!success) {
+      return res.status(404).send("Recipe not found");
+    }
+    res.status(204).send();
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error deleting recipe");
+  }
+};
+
 module.exports = {
   getAllRecipes,
   getRecipesById,
+  createRecipe,
+  updateRecipe,
+  deleteRecipe,
 };

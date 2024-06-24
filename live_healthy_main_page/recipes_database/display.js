@@ -2,13 +2,22 @@ const express = require("express");
 const recipesController = require("./controllers/recipesController");
 const sql = require("mssql"); // Assuming you've installed mssql
 const dbConfig = require("./dbConfig");
+const bodyParser = require("body-parser"); // Import body-parser
+const validateRecipe = require("./middlewares/validateRecipe");
 
 const app = express();
 const port = process.env.PORT || 3000; // Use environment variable or default port
 
+// Include body-parser middleware to handle JSON data
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // For form data handling
+
 // Routes for GET requests (replace with appropriate routes for update and delete later)
 app.get("/recipes", recipesController.getAllRecipes);
 app.get("/recipes/:id", recipesController.getRecipesById);
+app.post("/recipes", validateRecipe, recipesController.createRecipe);
+app.put("/recipes/:id", validateRecipe, recipesController.updateRecipe);
+app.delete("/recipes/:id", recipesController.deleteRecipe);
 
 app.listen(port, async () => {
   try {
