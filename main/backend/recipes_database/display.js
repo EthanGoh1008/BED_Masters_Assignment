@@ -6,7 +6,7 @@ const bodyParser = require("body-parser"); // Import body-parser
 const validateRecipe = require("./middlewares/validateRecipe");
 
 const app = express();
-const port = process.env.PORT || 3000; // Use environment variable or default port
+const port = process.env.PORT || 3000; // Use environment variable or default ports
 
 // Include body-parser middleware to handle JSON data
 app.use(bodyParser.json());
