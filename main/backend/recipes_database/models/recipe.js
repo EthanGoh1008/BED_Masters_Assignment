@@ -20,13 +20,13 @@ class Recipe {
 
     return result.recordset.map(
       (row) => new Recipe(row.id, row.title, row.image_url)
-    ); // Convert rows to Book objects
+    ); // Convert rows to Recipe objects
   }
 
   static async getRecipesById(id) {
     const connection = await sql.connect(dbConfig);
 
-    const sqlQuery = `SELECT * FROM FoodRecipes WHERE id = @id`; // Parameterized query
+    const sqlQuery = "SELECT * FROM FoodRecipes WHERE id = @id"; // Parameterized query
 
     const request = connection.request();
     request.input("id", id);
@@ -55,15 +55,16 @@ class Recipe {
 
     const result = await request.query(sqlQuery);
 
-    connection.close;
+    connection.close();
 
-    return this.getRecipesById(result.recordset[0].id);
+    return this.getRecipeById(result.recordset[0].id);
   }
 
   static async updateRecipe(id, newRecipeData) {
     const connection = await sql.connect(dbConfig);
 
-    const sqlQuery = `UPDATE FoodRecipes SET title = @title, image_url = @image_url WHERE id = @id`;
+    const sqlQuery =
+      "UPDATE FoodRecipes SET title = @title, image_url = @image_url WHERE id = @id";
 
     const request = connection.request();
     request.input("id", id);
@@ -74,19 +75,19 @@ class Recipe {
 
     connection.close();
 
-    return this.getRecipesById(id);
+    return this.getRecipeById(id);
   }
 
   static async deleteRecipe(id) {
     const connection = await sql.connect(dbConfig);
 
-    const sqlQuery = `DELETE FROM FoodRecipes WHERE id = @id`;
+    const sqlQuery = "DELETE FROM FoodRecipes WHERE id = @id";
 
     const request = connection.request();
     request.input("id", id);
     const result = await request.query(sqlQuery);
 
-    connection.close();
+    await connection.close();
 
     return result.rowsAffected > 0;
   }

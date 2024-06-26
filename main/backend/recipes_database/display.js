@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // For form data handling
 
 // Routes for GET requests (replace with appropriate routes for update and delete later)
 app.get("/recipes", recipesController.getAllRecipes);
-app.get("/recipes/:id", recipesController.getRecipesById);
+app.get("/recipes/:id", recipesController.getRecipeById);
 app.post("/recipes", validateRecipe, recipesController.createRecipe);
 app.put("/recipes/:id", validateRecipe, recipesController.updateRecipe);
 app.delete("/recipes/:id", recipesController.deleteRecipe);
