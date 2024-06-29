@@ -1,28 +1,26 @@
-async function fetchRecipes() {
-  const response = await fetch("/recipes"); // Replace with your API endpoint
-  const data = await response.json();
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("/recipes")
+    .then((response) => response.json())
+    .then((data) => {
+      const recipesList = document.getElementById("recipes-list");
+      data.forEach((recipe) => {
+        const recipeCard = document.createElement("div");
+        recipeCard.classList.add("recipe-card");
 
-  const recipeList = document.getElementById("recipes-list");
+        const recipeImage = document.createElement("img");
+        recipeImage.src = recipe.image_url;
+        recipeImage.alt = recipe.title;
 
-  data.forEach((recipe) => {
-    const recipeItem = document.createElement("div");
-    recipeItem.classList.add("recipe"); // Add a CSS class for styling
+        const recipeTitle = document.createElement("h2");
+        recipeTitle.textContent = recipe.title;
 
-    // Create elements for title, image_url, etc. and populate with recipe   data
-    const titleElement = document.createElement("h2");
-    titleElement.textContent = recipe.title;
+        recipeCard.appendChild(recipeImage);
+        recipeCard.appendChild(recipeTitle);
 
-    const image_urlElement = document.createElement("p");
-    image_urlElement.textContent = recipe.image_url;
-
-    // ... add more elements for other recipe data (optional)
-
-    recipeItem.appendChild(titleElement);
-    recipeItem.appendChild(image_urlElement);
-    // ... append other elements
-
-    recipeList.appendChild(recipeItem);
-  });
-}
-
-fetchRecipes(); // Call the function to fetch and display book data
+        recipesList.appendChild(recipeCard);
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching recipes:", error);
+    });
+});

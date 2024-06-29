@@ -1,43 +1,46 @@
-/* Basic reset to remove default margins and padding */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
   background-color: #f4f4f4;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#recipes-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 20px;
 }
 
-/* Container for the recipes */
-.recipe-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-/* Individual recipe card */
 .recipe-card {
-  background-color: white;
+  background-color: #fff;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
   width: 300px;
+  overflow: hidden;
   text-align: center;
 }
 
-/* Recipe image */
 .recipe-card img {
   width: 100%;
-  height: auto;
+  height: 200px; /* Set a fixed height for the images */
+  object-fit: cover; /* Ensure the images cover the container while maintaining aspect ratio */
 }
 
-/* Recipe title */
 .recipe-card h2 {
-  font-size: 1.2em;
-  color: #333;
-  margin: 15px 0;
+  font-size: 20px;
+  margin: 10px 0;
+  padding: 0 10px;
+}
+
+.recipe-card p {
+  padding: 0 10px 20px;
+  color: #555;
 }

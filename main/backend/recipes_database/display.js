@@ -10,6 +10,12 @@ const port = process.env.PORT || 3000; // Use environment variable or default po
 
 const staticMiddleware = express.static("public"); // Path to the public folder
 
+const path = require("path");
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "recipesmore.html"));
+});
+
 // Include body-parser middleware to handle JSON data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // For form data handling
