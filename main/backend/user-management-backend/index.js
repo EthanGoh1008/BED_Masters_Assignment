@@ -1,25 +1,14 @@
-const userModel = require("../models/userModel");
+const express = require("express");
+const bodyParser = require("body-parser");
+const usersRoute = require("./routes/users");
 
-async function getUsers(req, res) {
-  try {
-    const users = await userModel.getAllUsers();
-    res.json(users);
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-}
+const app = express();
 
-async function addUser(req, res) {
-  try {
-    const user = req.body;
-    await userModel.createUser(user);
-    res.status(201).send("User created successfully");
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-}
+app.use(bodyParser.json());
 
-module.exports = {
-  getUsers,
-  addUser,
-};
+app.use("/api/users", usersRoute);
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
