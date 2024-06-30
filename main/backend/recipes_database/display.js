@@ -8,9 +8,11 @@ const validateRecipe = require("./middlewares/validateRecipe");
 const app = express();
 const port = process.env.PORT || 3000; // Use environment variable or default ports
 
+
 // Include body-parser middleware to handle JSON data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // For form data handling
+
 
 // Routes for GET requests (replace with appropriate routes for update and delete later)
 app.get("/recipes", recipesController.getAllRecipes);

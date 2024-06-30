@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Users</title>
+    <link rel="stylesheet" href="admin-create-styles.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>HL SEA Admin</h2>
+      <ul>
+        <li><a href="..\admin-dashboard\index.html">Dashboard</a></li>
+        <li><a href="manage_users.html">Manage Users</a></li>
+        <li>Content</li>
+        <li>Event</li>
+        <li>Challenges</li>
+        <li>Forum</li>
+        <li class="logout">Log out</li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <div class="header">
+        <div class="welcome">
+          <h1>Manage User</h1>
+        </div>
+        <div class="user-info">
+          <img src="notification.png" alt="Notifications" />
+          <span>Alexia</span>
+          <img src="user-icon.png" alt="User Icon" />
+        </div>
+      </div>
+      <div class="manage-users">
+        <h2>Manage User</h2>
+        <div class="user-list">
+          <h3>User List</h3>
+          <a href="add_user.html" class="add-user">+</a>
+          <table>
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="user-table-body">
+              <!-- User rows will be dynamically inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="admin-create-script.js"></script>
+  </body>
+</html>
