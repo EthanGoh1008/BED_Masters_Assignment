@@ -57,7 +57,7 @@ class Recipe {
 
     connection.close();
 
-    return this.getRecipesById(result.recordset[0].id);
+
   }
 
   static async updateRecipe(id, newRecipeData) {
