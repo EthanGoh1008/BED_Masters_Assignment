@@ -34,7 +34,7 @@
         <h2>Manage User</h2>
         <div class="user-list">
           <h3>User List</h3>
-          <button class="add-user">+</button>
+          <a href="add_user.html" class="add-user">+</a>
           <table>
             <thead>
               <tr>
@@ -43,23 +43,8 @@
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>1.</td>
-                <td>Liew</td>
-                <td>
-                  <button class="edit">✏️</button>
-                  <button class="delete">❌</button>
-                </td>
-              </tr>
-              <tr>
-                <td>2.</td>
-                <td>Jon</td>
-                <td>
-                  <button class="edit">✏️</button>
-                  <button class="delete">❌</button>
-                </td>
-              </tr>
+            <tbody id="user-table-body">
+              <!-- User rows will be dynamically inserted here -->
             </tbody>
           </table>
         </div>
