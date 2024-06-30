@@ -1,4 +1,4 @@
-const Recipe = require("../models/recipe"); //IDK IF IT'S RECIPE OR RECIPES
+
 
 const getAllRecipes = async (req, res) => {
   try {
@@ -10,10 +10,7 @@ const getAllRecipes = async (req, res) => {
   }
 };
 
-const getRecipesById = async (req, res) => {
-  const recipeId = parseInt(req.params.id);
-  try {
-    const recipe = await Recipe.getRecipesById(recipeId);
+
     if (!recipe) {
       return res.status(404).send("Recipe not found");
     }
@@ -68,7 +65,7 @@ const deleteRecipe = async (req, res) => {
 
 module.exports = {
   getAllRecipes,
-  getRecipesById,
+
   createRecipe,
   updateRecipe,
   deleteRecipe,

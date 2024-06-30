@@ -1,0 +1,124 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#post_recipes {
+  display: block; /* Makes the button a block-level element */
+  margin: 0 auto; /* Centers the button horizontally */
+  padding: 10px 20px; /* Adds padding to the button */
+  font-size: 16px; /* Sets the font size */
+  color: #fff; /* Sets the text color */
+  background-color: #4caf50; /* Sets the background color */
+  border: none; /* Removes the border */
+  border-radius: 5px; /* Rounds the corners */
+  cursor: pointer; /* Changes the cursor to a pointer when hovering */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Adds transition effects */
+}
+
+#post_recipes:hover {
+  background-color: #006400; /* Changes the background color on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1); /* Increases the shadow on hover */
+}
+
+#recipes-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.recipe-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  width: 300px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.recipe-card img {
+  width: 100%;
+  height: 200px; /* Set a fixed height for the images */
+  object-fit: cover; /* Ensure the images cover the container while maintaining aspect ratio */
+}
+
+.recipe-card h2 {
+  font-size: 20px;
+  margin: 10px 0;
+  padding: 0 10px;
+}
+
+.recipe-card p {
+  padding: 0 10px 20px;
+  color: #555;
+}
+
+#addrecipeform {
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  margin: 50px auto;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: none;
+}
+
+#addrecipeform h2 {
+  text-align: center;
+  color: #333;
+}
+
+#addrecipeform label {
+  display: block;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+#addrecipeform input[type="text"] {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#post_recipe {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#post_recipe:hover {
+  background-color: #218838;
+}
+
+@media (max-width: 600px) {
+  #addrecipeform {
+    padding: 15px;
+  }
+  #addrecipeform input[type="text"] {
+    padding: 8px;
+  }
+  #addrecipeform input[type="submit"] {
+    padding: 8px;
+    font-size: 14px;
+  }
+}
