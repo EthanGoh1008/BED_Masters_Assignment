@@ -5,9 +5,9 @@ const router = express.Router();
 
 // Register a new user
 router.post("/register", async (req, res) => {
-  const { email, password } = req.body;
+  const { username, email, password } = req.body;
 
-  if (!email || !password) {
+  if (!username || !email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
 
@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
     const result = await pool
       .request()
       .input("email", sql.VarChar, email)
-      .query("SELECT * FROM Users WHERE Email = @Email");
+      .query("SELECT * FROM Users WHERE email = @email");
 
     if (result.recordset.length > 0) {
       return res.status(400).json({ msg: "User already exists" });
@@ -27,10 +27,11 @@ router.post("/register", async (req, res) => {
 
     await pool
       .request()
+      .input("username", sql.VarChar, username)
       .input("email", sql.VarChar, email)
-      .input("passwordHash", sql.VarChar, hash)
+      .input("password", sql.VarChar, hash)
       .query(
-        "INSERT INTO Users (Email, PasswordHash) VALUES (@Email, @PasswordHash)"
+        "INSERT INTO Users (username, email, password) VALUES (@username, @email, @password)"
       );
 
     res.status(201).json({ msg: "User registered successfully" });
