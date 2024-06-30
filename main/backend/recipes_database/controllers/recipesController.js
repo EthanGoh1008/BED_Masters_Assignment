@@ -14,7 +14,7 @@ const getRecipeById = async (req, res) => {
   // Corrected function name
   const recipeId = parseInt(req.params.id);
   try {
-    const recipe = await Recipe.getRecipeById(recipeId); // Corrected method name
+    const recipe = await Recipe.getRecipesById(recipeId); // Corrected method name
     if (!recipe) {
       return res.status(404).send("Recipe not found");
     }
