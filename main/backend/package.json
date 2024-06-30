@@ -10,9 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "express": "^4.19.2",
     "joi": "^17.13.3",
     "mssql": "^11.0.0",
     "mysql": "^2.18.1"
+=======
+
+>>>>>>> 82c9f538f092da52d731aa1eba3aaacf6ad41e68
   }
 }
