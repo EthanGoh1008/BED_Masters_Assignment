@@ -1,4 +1,4 @@
-
+const Recipe = require("../models/recipe"); // Ensure this matches your actual model file name
 
 const getAllRecipes = async (req, res) => {
   try {
@@ -10,7 +10,11 @@ const getAllRecipes = async (req, res) => {
   }
 };
 
-
+const getRecipeById = async (req, res) => {
+  // Corrected function name
+  const recipeId = parseInt(req.params.id);
+  try {
+    const recipe = await Recipe.getRecipesById(recipeId); // Corrected method name
     if (!recipe) {
       return res.status(404).send("Recipe not found");
     }
@@ -65,7 +69,7 @@ const deleteRecipe = async (req, res) => {
 
 module.exports = {
   getAllRecipes,
-
+  getRecipeById, // Corrected export name
   createRecipe,
   updateRecipe,
   deleteRecipe,
