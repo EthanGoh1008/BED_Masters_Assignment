@@ -7,8 +7,32 @@
     <link rel="stylesheet" href="styles/styles.css" />
   </head>
   <body>
-    <h1>Recipes API</h1>
+    <h1>Recipes List</h1>
     <section id="recipes-list"></section>
     <script src="scripts/script.js"></script>
+    <button id="post_recipes" onclick="addRecipe()">Add Recipes</button>
+    <div id="addrecipeform">
+      <form>
+        <label for="recipetitle">Recipe Name</label>
+        <input
+          type="text"
+          id="recipetitle"
+          name="recipetitle"
+          placeholder="Enter recipe title"
+        />
+
+        <label for="imageurl">Image URL</label>
+        <input
+          type="text"
+          id="imageurl"
+          name="imageurl"
+          placeholder="Enter image URL"
+        />
+
+        <button id="post_recipe" onclick="addRecipeToDB(event)">
+          Add Recipe
+        </button>
+      </form>
+    </div>
   </body>
 </html>
