@@ -6,6 +6,7 @@ const dbConfig = {
   options: {
     encrypt: true, // Use this if you're on Windows Azure
     enableArithAbort: true,
+    trustServerCertificate: true, // Add this line
   },
 };
 
