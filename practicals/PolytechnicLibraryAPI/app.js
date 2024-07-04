@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config(); // Make sure this is at the very top
 const express = require("express");
 const { poolPromise } = require("./dbConfig");
 const { registerUser, login } = require("./controllers/authControllers");

@@ -10,6 +10,7 @@ function verifyJWT(req, res, next) {
 
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
+      console.log("Token verification failed:", err.message);
       return res.status(403).json({ message: "Forbidden" });
     }
 
@@ -22,6 +23,9 @@ function verifyJWT(req, res, next) {
 
 function authorizeRoles(...roles) {
   return (req, res, next) => {
+    console.log("Required roles:", roles); // Log the required roles
+    console.log("User role:", req.user.role); // Log the user's role
+
     if (!roles.includes(req.user.role)) {
       console.log(`User role ${req.user.role} not authorized`); // Log the role check for debugging
       return res.status(403).json({ message: "Forbidden" });
