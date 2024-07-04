@@ -13,6 +13,8 @@ function verifyJWT(req, res, next) {
       return res.status(403).json({ message: "Forbidden" });
     }
 
+    console.log("Decoded token:", decoded); // Log the decoded token for debugging
+
     req.user = decoded;
     next();
   });
@@ -21,6 +23,7 @@ function verifyJWT(req, res, next) {
 function authorizeRoles(...roles) {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
+      console.log(`User role ${req.user.role} not authorized`); // Log the role check for debugging
       return res.status(403).json({ message: "Forbidden" });
     }
     next();

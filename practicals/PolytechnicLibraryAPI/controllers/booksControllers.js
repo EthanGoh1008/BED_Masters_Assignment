@@ -1,4 +1,5 @@
 const { getAllBooks, updateBookAvailability } = require("../models/book");
+require("dotenv").config(); // Ensure this is at the top of your file
 
 async function getAllBooksController(req, res) {
   try {

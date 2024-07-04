@@ -6,17 +6,14 @@ async function registerUser(req, res) {
   const { username, password, role } = req.body;
 
   try {
-    // Check for existing username
     const existingUser = await getUserByUsername(username);
     if (existingUser) {
       return res.status(400).json({ message: "Username already exists" });
     }
 
-    // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create user in database
     await createUser(username, hashedPassword, role);
 
     res.status(201).json({ message: "User created successfully" });
@@ -32,7 +29,6 @@ async function login(req, res) {
   const { username, password } = req.body;
 
   try {
-    // Validate user credentials
     const user = await getUserByUsername(username);
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
