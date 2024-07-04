@@ -21,8 +21,10 @@ async function registerUser(req, res) {
 
     res.status(201).json({ message: "User created successfully" });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Internal server error" });
+    console.error("Error during registration:", err.message);
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: err.message });
   }
 }
 
@@ -51,8 +53,10 @@ async function login(req, res) {
 
     res.status(200).json({ token });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Internal server error" });
+    console.error("Error during login:", err.message);
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: err.message });
   }
 }
 

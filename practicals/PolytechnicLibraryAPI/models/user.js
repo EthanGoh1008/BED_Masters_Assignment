@@ -9,6 +9,7 @@ async function getUserByUsername(username) {
       .query("SELECT * FROM Users WHERE username = @username");
     return result.recordset[0];
   } catch (err) {
+    console.error("Error during getUserByUsername:", err);
     throw new Error("Database query failed");
   }
 }
@@ -25,6 +26,7 @@ async function createUser(username, passwordHash, role) {
         "INSERT INTO Users (username, passwordHash, role) VALUES (@username, @passwordHash, @role)"
       );
   } catch (err) {
+    console.error("Error during createUser:", err);
     throw new Error("Database insert failed");
   }
 }
