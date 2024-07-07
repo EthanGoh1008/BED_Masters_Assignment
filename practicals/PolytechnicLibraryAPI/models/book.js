@@ -13,14 +13,16 @@ async function getAllBooks() {
 async function updateBookAvailability(bookId, availability) {
   try {
     const pool = await poolPromise;
-    await pool
+    const result = await pool
       .request()
       .input("availability", sql.Char, availability)
       .input("bookId", sql.Int, bookId)
       .query(
         "UPDATE Books SET availability = @availability WHERE book_id = @bookId"
       );
+    console.log(`Rows affected: ${result.rowsAffected}`);
   } catch (err) {
+    console.error("Error updating book availability:", err.message);
     throw new Error("Database update failed");
   }
 }

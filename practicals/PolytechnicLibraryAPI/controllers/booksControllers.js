@@ -3,6 +3,7 @@ require("dotenv").config(); // Ensure this is at the top of your file
 
 async function getAllBooksController(req, res) {
   try {
+    console.log("User info from token:", req.user); // Log user info
     const books = await getAllBooks();
     res.status(200).json(books);
   } catch (err) {
