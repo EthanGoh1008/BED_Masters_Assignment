@@ -93,4 +93,38 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { username, email, password } = req.body;
+
+  try {
+    const pool = await poolPromise;
+    const request = pool.request().input("id", sql.Int, id);
+
+    let query = "UPDATE Users SET ";
+    if (username) {
+      query += "username = @username, ";
+      request.input("username", sql.VarChar, username);
+    }
+    if (email) {
+      query += "email = @Email, ";
+      request.input("email", sql.VarChar, email);
+    }
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      query += "password = @Password, ";
+      request.input("password", sql.VarChar, hashedPassword);
+    }
+    query = query.slice(0, -2); // Remove the last comma
+    query += " WHERE id = @id";
+
+    await request.query(query);
+
+    res.status(200).json({ msg: "User updated successfully" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 module.exports = router;
