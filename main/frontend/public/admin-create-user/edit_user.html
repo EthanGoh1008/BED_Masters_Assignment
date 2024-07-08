@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit User</title>
+    <link rel="stylesheet" href="add_user.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>HL SEA Admin</h2>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="manage_users.html">Manage Users</a></li>
+        <li>Content</li>
+        <li>Event</li>
+        <li>Challenges</li>
+        <li>Forum</li>
+        <li class="logout">Log out</li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <div class="header">
+        <div class="welcome">
+          <h1>Edit User</h1>
+        </div>
+        <div class="user-info">
+          <img src="notification.png" alt="Notifications" />
+          <span>Alexia</span>
+          <img src="user-icon.png" alt="User Icon" />
+        </div>
+      </div>
+      <div class="add-user">
+        <h2>Edit User</h2>
+        <form id="edit-user-form">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" />
+          </div>
+          <button type="submit">Edit</button>
+        </form>
+      </div>
+    </div>
+    <script src="edit_user.js"></script>
+  </body>
+</html>

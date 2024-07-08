@@ -1,0 +1,133 @@
+body {
+  display: flex;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.sidebar {
+  width: 200px;
+  background: #444;
+  color: white;
+  padding: 20px;
+  height: 100vh;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar ul li:hover,
+.sidebar ul .logout {
+  background: #666;
+}
+
+.sidebar ul .logout {
+  color: red;
+  margin-top: 20px;
+}
+
+.main-content {
+  flex-grow: 1;
+  background: #f0f0f0;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.header .user-info {
+  display: flex;
+  align-items: center;
+}
+
+.header .user-info img {
+  margin: 0 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.manage-users {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.manage-users h2 {
+  margin-bottom: 20px;
+}
+
+.user-list {
+  position: relative;
+}
+
+.user-list h3 {
+  display: inline-block;
+}
+
+.add-user {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #00c0ef;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background: #eee;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.edit,
+.delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
