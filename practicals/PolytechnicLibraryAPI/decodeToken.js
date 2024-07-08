@@ -10,5 +10,5 @@ function decodeToken(token) {
   }
 }
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6Im1lbWJlciIsImlhdCI6MTcyMDA3NDI5NCwiZXhwIjoxNzIwMDc3ODk0fQ.4RuWnWr1cOf1_FVTaPFCa380Hn1MIP79DxqftpzNkxI"; // Replace with your actual token
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6ImxpYnJhcmlhbiIsImlhdCI6MTcyMDQwNDA5MiwiZXhwIjoxNzIwNDA3NjkyfQ.QcidCCFNLJRHXo0oQxmDhOz8EkNDSFLEx4GN1G3hJ1M"; // Replace with your actual token
 decodeToken(token);
