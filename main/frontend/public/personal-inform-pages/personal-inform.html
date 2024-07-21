@@ -1,30 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile Information</title>
-    <link rel="stylesheet" href="personal-info-styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="personal-info-styles.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="../main-page/main-page.html">
+        <div class="logo">
+          <img src="../images/logo.jpg" alt="Logo" />
+        </div>
+      </a>
+      <ul>
+        <li><a href="../main-page/main-page.html">Home</a></li>
+        <li><a href="../about-us-pages/about-us.html">About Us</a></li>
+        <li>
+          <a href="../livehealthy/livehealthymp.html"
+            >Overview Healthy Habits</a
+          >
+        </li>
+        <li><a href="../forum/forum.html">Forum</a></li>
+        <li><a href="#">Upcoming Events</a></li>
+        <li><a href="#">Current Challenges</a></li>
+      </ul>
+      <a href="../personal-inform-pages/personal-inform.html">
+        <div class="profile-icon">
+          <img src="../images/personal-info-icon.png" alt="Profile Icon" />
+        </div>
+      </a>
+    </div>
+
     <div class="container">
-        <h1>Profile Information</h1>
-        <form id="profile-form">
-            <div class="form-group">
-                <label for="name">Name <span>*</span></label>
-                <input type="text" id="name" name="name" placeholder="Name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email <span>*</span></label>
-                <input type="email" id="email" name="email" placeholder="Email Address" required>
-            </div>
-            <div class="form-group">
-                <label for="about">About Myself</label>
-                <textarea id="about" name="about" placeholder="Write something about yourself..." rows="4"></textarea>
-            </div>
-            <button type="submit">Update</button>
-        </form>
+      <h1>Profile Information</h1>
+      <form id="profile-form">
+        <div class="form-group">
+          <label for="name">Name <span>*</span></label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email <span>*</span></label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email Address"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="about">About Myself</label>
+          <textarea
+            id="about"
+            name="about"
+            placeholder="Write something about yourself..."
+            rows="4"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="event">Preferred Event</label>
+          <select id="event" name="event">
+            <option value="" disabled selected>-Select an Event-</option>
+            <option value="workshop">Workshop</option>
+            <option value="seminar">Seminar</option>
+            <option value="conference">Conference</option>
+            <option value="webinar">Webinar</option>
+          </select>
+        </div>
+        <button type="submit">Update</button>
+      </form>
     </div>
     <script src="personal-info-scripts.js"></script>
-</body>
+  </body>
 </html>
