@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const recipesController = require("./controllers/recipesController");
 const sql = require("mssql"); // Assuming you've installed mssql
 const dbConfig = require("./dbConfig");
@@ -8,11 +9,17 @@ const validateRecipe = require("./middlewares/validateRecipe");
 const app = express();
 const port = process.env.PORT || 3000; // Use environment variable or default ports
 
-
 // Include body-parser middleware to handle JSON data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // For form data handling
 
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, "public")));
+
+// Serve recipesmore.html at the root route
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "recipesmore.html"));
+});
 
 // Routes for GET requests (replace with appropriate routes for update and delete later)
 app.get("/recipes", recipesController.getAllRecipes);
