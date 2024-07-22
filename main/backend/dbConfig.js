@@ -10,5 +10,5 @@ module.exports = {
     enableArithAbort: true,
     trustServerCertificate: true, // Add this line if you are using self-signed certificates
   },
-  jwtSecret: "your_jwt_secret",
-}; 
+  jwtSecret: process.env.JWT_SECRET,
+};

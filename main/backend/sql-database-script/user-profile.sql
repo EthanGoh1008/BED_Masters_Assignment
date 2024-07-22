@@ -13,3 +13,10 @@ VALUES
 ('Alice', 'alice@example.com', 'password123'),
 ('Bob', 'bob@example.com', 'password123');
 
+INSERT INTO UserProfile (userId, aboutMyself, preferredEvent)
+VALUES 
+(1, 'About exampleUser', 'Event 1'),
+(2, 'About Liew', 'Event 2'),
+(3, 'About Liewzhanyang', 'Event 3'),
+(4, 'About Alice', 'Event 4'),
+(5, 'About Bob', 'Event 5');
