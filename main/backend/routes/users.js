@@ -1,6 +1,9 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { body, validationResult } = require("express-validator");
 const { poolPromise, sql } = require("../database-connection/db");
+const { jwtSecret } = require("../config/dbConfig"); // Add this line
 const router = express.Router();
 
 // Register a new user
@@ -127,4 +130,82 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.post(
+  "/login",
+  [body("email").isEmail(), body("password").exists()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { email, password } = req.body;
+
+    try {
+      const pool = await poolPromise;
+      const result = await pool
+        .request()
+        .input("email", sql.VarChar, email)
+        .query("SELECT * FROM Users WHERE email = @Email");
+
+      if (result.recordset.length === 0) {
+        return res.status(400).json({ msg: "Invalid credentials" });
+      }
+
+      const user = result.recordset[0];
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ msg: "Invalid credentials" });
+      }
+
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
+
+      jwt.sign(payload, jwtSecret, { expiresIn: "1h" }, (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server error");
+    }
+  }
+);
+
+// Middleware to validate token
+const auth = (req, res, next) => {
+  const token = req.header("x-auth-token");
+  if (!token) {
+    return res.status(401).json({ msg: "No token, authorization denied" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, jwtSecret);
+    req.user = decoded.user;
+    next();
+  } catch (err) {
+    res.status(401).json({ msg: "Token is not valid" });
+  }
+};
+
+// Protected route example
+router.get("/me", auth, async (req, res) => {
+  try {
+    const pool = await poolPromise;
+    const result = await pool
+      .request()
+      .input("id", sql.Int, req.user.id)
+      .query("SELECT * FROM Users WHERE id = @id");
+
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+module.exports = router;
 module.exports = router;
