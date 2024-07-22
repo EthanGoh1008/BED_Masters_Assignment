@@ -12,3 +12,16 @@ module.exports = {
   },
   jwtSecret: process.env.JWT_SECRET,
 };
+
+const poolPromise = new sql.ConnectionPool(config)
+  .connect()
+  .then((pool) => {
+    console.log("Connected to MSSQL");
+    return pool;
+  })
+  .catch((err) => {
+    console.error("Database connection failed:", err.message);
+    throw new Error("Database connection failed");
+  });
+
+module.exports = { sql, poolPromise };

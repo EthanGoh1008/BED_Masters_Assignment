@@ -1,10 +1,13 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
-const jwt = require('jsonwebtoken');
-const { body, validationResult } = require('express-validator');
+const jwt = require("jsonwebtoken");
+const { body, validationResult } = require("express-validator");
 const { poolPromise, sql } = require("../database-connection/db");
 
 const router = express.Router();
+const { registerUser } = require("../controllers/userController");
+
+router.post("/registers", registerUser);
 
 // Register a new user
 router.post("/register", async (req, res) => {
@@ -124,6 +127,49 @@ router.put("/:id", async (req, res) => {
     await request.query(query);
 
     res.status(200).json({ msg: "User updated successfully" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+// Login a user
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ msg: "Please enter all fields" });
+  }
+
+  try {
+    const pool = await poolPromise;
+    const result = await pool
+      .request()
+      .input("email", sql.VarChar, email)
+      .query("SELECT * FROM Users WHERE email = @Email");
+
+    if (result.recordset.length === 0) {
+      return res.status(401).json({ msg: "Invalid credentials" });
+    }
+
+    const user = result.recordset[0];
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ msg: "Invalid credentials" });
+    }
+
+    const payload = {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.status(200).json({ token });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
