@@ -1,15 +1,27 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    window.location.href = "login.html";
+    return;
+  }
+
   fetchUsers();
 
   document.querySelector(".logout").addEventListener("click", function () {
-    alert("Logging out...");
-    // Add actual logout functionality here
+    localStorage.removeItem("token");
+    alert("Logged out");
+    window.location.href = "login.html";
   });
 });
 
 async function fetchUsers() {
   try {
-    const response = await fetch("http://localhost:3000/api/users");
+    const token = localStorage.getItem("token");
+    const response = await fetch("http://localhost:3000/api/users", {
+      headers: {
+        "x-auth-token": token,
+      },
+    });
     const users = await response.json();
     populateTable(users);
   } catch (error) {
@@ -60,8 +72,12 @@ function populateTable(users) {
 async function deleteUser(id, row) {
   if (confirm("Are you sure you want to delete this user?")) {
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(`http://localhost:3000/api/users/${id}`, {
         method: "DELETE",
+        headers: {
+          "x-auth-token": token,
+        },
       });
 
       if (!response.ok) {
