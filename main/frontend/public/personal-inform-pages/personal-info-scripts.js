@@ -1,58 +1,66 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const token = localStorage.getItem("token");
+document.addEventListener("DOMContentLoaded", async function () {
+  const userId = 2013; // Use a fixed user ID for testing
 
-  if (!token) {
-    alert("You are not logged in.");
-    window.location.href = "signin.html"; // Redirect to sign-in page
-    return;
-  }
-
-  // Fetch current profile information
-  fetch("http://localhost:3000/api/users/me", {
-    headers: {
-      "x-auth-token": token,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.username) {
-        document.getElementById("name").value = data.username;
-        document.getElementById("email").value = data.email;
-        document.getElementById("aboutMyself").value = data.aboutMyself;
-        document.getElementById("preferredEvent").value = data.preferredEvent;
-      } else {
-        alert("Failed to fetch profile information.");
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      alert("Failed to fetch profile information.");
-    });
-
-  // Handle form submission
-  document
-    .getElementById("profile-form")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const aboutMyself = document.getElementById("aboutMyself").value;
-      const preferredEvent = document.getElementById("preferredEvent").value;
-
-      fetch("http://localhost:3000/api/users/profile", {
-        method: "PUT",
+  try {
+    const response = await fetch(
+      `http://localhost:3000/api/users/profile/${userId}`,
+      {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "x-auth-token": token,
         },
-        body: JSON.stringify({ aboutMyself, preferredEvent }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          alert(data.msg);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          alert("Failed to update profile.");
-        });
+      }
+    );
+
+    const userData = await response.json();
+
+    if (response.ok) {
+      document.getElementById("name").value = userData.username || "";
+      document.getElementById("email").value = userData.email || "";
+      document.getElementById("about-myself").value =
+        userData.aboutMyself || "";
+      document.getElementById("preferred-event").value =
+        userData.preferredEvent || "";
+    } else {
+      console.error("Failed to fetch user data:", userData.msg);
+      alert(userData.msg || "User profile not found");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Failed to fetch user data");
+  }
+
+  document
+    .getElementById("update-button")
+    .addEventListener("click", async function (event) {
+      event.preventDefault();
+
+      const aboutMyself = document.getElementById("about-myself").value;
+      const preferredEvent = document.getElementById("preferred-event").value;
+
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/users/profile/${userId}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ aboutMyself, preferredEvent }),
+          }
+        );
+
+        const result = await response.json();
+
+        if (response.ok) {
+          alert("Profile updated successfully");
+        } else {
+          console.error("Failed to update profile:", result.msg);
+          alert(result.msg || "Failed to update profile");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to update profile");
+      }
     });
 });

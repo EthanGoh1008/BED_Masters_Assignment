@@ -1,9 +1,13 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { poolPromise, sql } = require("../dbConfig");
+const { body, validationResult } = require("express-validator");
+const { poolPromise, sql } = require("../database-connection/db");
 
 const router = express.Router();
+const { registerUser } = require("../controllers/userController");
+
+router.post("/registers", registerUser);
 
 // Register a new user
 router.post("/register", async (req, res) => {
@@ -43,7 +47,6 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Other routes (login, get user by ID, update user, delete user) go here...
 router.get("/", async (req, res) => {
   try {
     const pool = await poolPromise;
@@ -58,20 +61,18 @@ router.get("/", async (req, res) => {
 });
 
 // Get user by ID
-router.get("/profile/:userId", async (req, res) => {
-  const { userId } = req.params;
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
 
   try {
     const pool = await poolPromise;
-    const result = await pool.request().input("userId", sql.Int, userId).query(`
-        SELECT u.username, u.email, up.aboutMyself, up.preferredEvent 
-        FROM Users u
-        LEFT JOIN UserProfile up ON u.id = up.userId
-        WHERE u.id = @userId
-      `);
+    const result = await pool
+      .request()
+      .input("id", sql.Int, id)
+      .query("SELECT id, username, email FROM Users WHERE id = @id");
 
     if (result.recordset.length === 0) {
-      return res.status(404).json({ msg: "User profile not found" });
+      return res.status(404).json({ msg: "User not found" });
     }
 
     res.json(result.recordset[0]);
@@ -98,48 +99,41 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.put("/profile/:userId", async (req, res) => {
-  const { userId } = req.params;
-  const { aboutMyself, preferredEvent } = req.body;
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { username, email, password } = req.body;
 
   try {
     const pool = await poolPromise;
+    const request = pool.request().input("id", sql.Int, id);
 
-    // Check if user profile exists
-    const profileCheck = await pool
-      .request()
-      .input("userId", sql.Int, userId)
-      .query("SELECT * FROM UserProfile WHERE userId = @userId");
-
-    if (profileCheck.recordset.length === 0) {
-      // Insert new profile if not exists
-      await pool
-        .request()
-        .input("userId", sql.Int, userId)
-        .input("aboutMyself", sql.NVarChar(sql.MAX), aboutMyself)
-        .input("preferredEvent", sql.NVarChar(100), preferredEvent)
-        .query(
-          "INSERT INTO UserProfile (userId, aboutMyself, preferredEvent) VALUES (@userId, @aboutMyself, @preferredEvent)"
-        );
-    } else {
-      // Update existing profile
-      await pool
-        .request()
-        .input("userId", sql.Int, userId)
-        .input("aboutMyself", sql.NVarChar(sql.MAX), aboutMyself)
-        .input("preferredEvent", sql.NVarChar(100), preferredEvent)
-        .query(
-          "UPDATE UserProfile SET aboutMyself = @aboutMyself, preferredEvent = @preferredEvent WHERE userId = @userId"
-        );
+    let query = "UPDATE Users SET ";
+    if (username) {
+      query += "username = @username, ";
+      request.input("username", sql.VarChar, username);
     }
+    if (email) {
+      query += "email = @Email, ";
+      request.input("email", sql.VarChar, email);
+    }
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      query += "password = @Password, ";
+      request.input("password", sql.VarChar, hashedPassword);
+    }
+    query = query.slice(0, -2); // Remove the last comma
+    query += " WHERE id = @id";
 
-    res.status(200).json({ msg: "Profile updated successfully" });
+    await request.query(query);
+
+    res.status(200).json({ msg: "User updated successfully" });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
   }
 });
 
+// Login a user
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -172,7 +166,7 @@ router.post("/login", async (req, res) => {
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "0.1h",
+      expiresIn: "1h",
     });
 
     res.status(200).json({ token });
@@ -182,5 +176,4 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Export the router
 module.exports = router;
