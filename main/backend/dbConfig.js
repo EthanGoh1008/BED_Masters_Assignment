@@ -1,17 +1,24 @@
-require("dotenv").config();
+const sql = require("mssql");
 
-module.exports = {
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  server: process.env.DB_SERVER,
-  database: process.env.DB_NAME,
+const config = {
+  user: "booksapi_user",
+  password: "123",
+  server: "localhost",
+  database: "user_management_db",
+  JWT_SECRET: "314c0a5fb23ddb01bfd8dd4264e3367a2b8b3cea34b99d691486906190a105debeb1eb764744e02427a0e6369255660c75dcf5652bc218f912a58bed6402f5fe",
   options: {
     encrypt: true,
     enableArithAbort: true,
-    trustServerCertificate: true, // Add this line if you are using self-signed certificates
+    trustServerCertificate: true,
   },
-  jwtSecret: process.env.JWT_SECRET,
+  pool: {
+    max: 10,
+    min: 0,
+    idleTimeoutMillis: 30000,
+  },
 };
+
+console.log("Database Config:", config);
 
 const poolPromise = new sql.ConnectionPool(config)
   .connect()
@@ -20,7 +27,7 @@ const poolPromise = new sql.ConnectionPool(config)
     return pool;
   })
   .catch((err) => {
-    console.error("Database connection failed:", err.message);
+    console.error("Database connection failed:", err.message, err);
     throw new Error("Database connection failed");
   });
 

@@ -1,13 +1,9 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { body, validationResult } = require("express-validator");
-const { poolPromise, sql } = require("../database-connection/db");
+const { poolPromise, sql } = require("../dbConfig");
 
 const router = express.Router();
-const { registerUser } = require("../controllers/userController");
-
-router.post("/registers", registerUser);
 
 // Register a new user
 router.post("/register", async (req, res) => {
@@ -47,6 +43,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
+// Other routes (login, get user by ID, update user, delete user) go here...
 router.get("/", async (req, res) => {
   try {
     const pool = await poolPromise;
@@ -133,7 +130,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Login a user
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -176,4 +172,5 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Export the router
 module.exports = router;
