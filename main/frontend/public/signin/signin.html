@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Sign In</title>
     <link rel="stylesheet" href="signin.css" />
     <style>
       body,
@@ -48,7 +48,7 @@
             <div class="login-form">
               <div class="sign-in-htm">
                 <div class="group">
-                  <label for="sign-in-user" class="label">Username</label>
+                  <label for="sign-in-user" class="label">Email</label>
                   <input id="sign-in-user" type="text" class="input" />
                 </div>
                 <div class="group">
@@ -67,7 +67,9 @@
                   >
                 </div>
                 <div class="group">
-                  <input type="submit" class="button" value="Sign In" />
+                  <button type="button" class="button" id="sign-in-button">
+                    Sign In
+                  </button>
                 </div>
                 <div class="hr"></div>
                 <div class="foot-lnk">
@@ -104,7 +106,9 @@
                   <input id="sign-up-email" type="text" class="input" />
                 </div>
                 <div class="group">
-                  <input type="submit" class="button" value="Sign Up" />
+                  <button type="button" class="button" id="sign-up-button">
+                    Sign Up
+                  </button>
                 </div>
                 <div class="hr"></div>
                 <div class="foot-lnk">
@@ -116,5 +120,6 @@
         </div>
       </div>
     </div>
+    <script src="signin.js"></script>
   </body>
 </html>
