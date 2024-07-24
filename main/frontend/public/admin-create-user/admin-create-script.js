@@ -5,24 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
     alert("Logging out...");
     // Add actual logout functionality here
   });
-
-  const editButtons = document.querySelectorAll(".edit");
-  const deleteButtons = document.querySelectorAll(".delete");
-
-  editButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      alert("Edit functionality not implemented yet.");
-      // Add actual edit functionality here
-    });
-  });
-
-  deleteButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const row = this.closest("tr");
-      row.remove();
-      // Add actual delete functionality here
-    });
-  });
 });
 
 async function fetchUsers() {
@@ -54,8 +36,7 @@ function populateTable(users) {
     editButton.classList.add("edit");
     editButton.textContent = "✏️";
     editButton.addEventListener("click", function () {
-      alert("Edit functionality not implemented yet.");
-      // Add actual edit functionality here
+      openEditModal(user);
     });
 
     const deleteButton = document.createElement("button");
@@ -74,25 +55,30 @@ function populateTable(users) {
 
     userTableBody.appendChild(row);
   });
+}
 
-  async function deleteUser(id, row) {
-    if (confirm("Are you sure you want to delete this user?")) {
-      try {
-        const response = await fetch(`http://localhost:3000/api/users/${id}`, {
-          method: "DELETE",
-        });
+async function deleteUser(id, row) {
+  if (confirm("Are you sure you want to delete this user?")) {
+    try {
+      const response = await fetch(`http://localhost:3000/api/users/${id}`, {
+        method: "DELETE",
+      });
 
-        if (!response.ok) {
-          throw new Error("Failed to delete user");
-        }
-
-        const result = await response.json();
-        alert(result.msg);
-        row.remove();
-      } catch (error) {
-        console.error("Error:", error);
-        alert("Error deleting user");
+      if (!response.ok) {
+        throw new Error("Failed to delete user");
       }
+
+      const result = await response.json();
+      alert(result.msg);
+      row.remove();
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error deleting user");
     }
   }
+}
+
+function openEditModal(user) {
+  const editUrl = `edit_user.html?id=${user.id}&username=${user.username}&email=${user.email}`;
+  window.location.href = editUrl;
 }

@@ -1,47 +1,50 @@
+require("dotenv").config();
 const express = require("express");
-const forumController = require("./controllers/forumController");
-const sql = require("mssql");
-const dbConfig = require("./dbConfig"); // Adjust filename as per your actual DB configuration file
 const bodyParser = require("body-parser");
-const validateForum = require("./middlewares/validateForum"); // Assuming you have a validation middleware for forums
-
+const cors = require("cors");
+const usersRoute = require("./routes/users");
+const forumController = require("./controllers/forumController");
+const validateForum = require("./middlewares/validateForum");
+const { poolPromise } = require("./dbConfig");
 const app = express();
 const port = process.env.PORT || 3000;
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger-output.json"); // Import generated spec
 
-// Middleware for parsing JSON and URL-encoded form data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Routes for forums
-app.get("/forum", forumController.getAllForums);
-app.post("/forum", validateForum, forumController.createForum);
-app.put("/forum/:id", validateForum, forumController.updateForum);
-app.delete("/forum/:id", forumController.deleteForum);
+app.use("/api/users", usersRoute);
 
-// Start server
+app.get("/api/forum", forumController.getAllForums);
+app.post("/api/forum", validateForum, forumController.createForum);
+app.put("/api/forum/:id", validateForum, forumController.updateForum);
+app.delete("/api/forum/:id", forumController.deleteForum);
+
+app.get("/", (req, res) => {
+  res.send("Welcome to the User Management and Forum API");
+});
+
 const startServer = async () => {
   try {
-    // Connect to the database
-    await sql.connect(dbConfig);
+    await poolPromise;
     console.log("Database connection established successfully");
+    app.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
   } catch (err) {
     console.error("Database connection error:", err);
-    // Terminate the application with an error code (optional)
-    process.exit(1); // Exit with code 1 indicating an error
+    process.exit(1);
   }
-
-  app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
-  });
 };
 
 startServer();
 
-// Close the connection pool on SIGINT signal
 process.on("SIGINT", async () => {
   console.log("Server is gracefully shutting down");
-  // Perform cleanup tasks (e.g., close database connections)
-  await sql.close();
+  await poolPromise.close();
   console.log("Database connection closed");
-  process.exit(0); // Exit with code 0 indicating successful shutdown
+  process.exit(0);
 });

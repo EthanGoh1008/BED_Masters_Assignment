@@ -1,0 +1,151 @@
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+  width: 100px; /* Adjust the width as necessary */
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar ul li {
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+  color: #5cb85c;
+}
+
+.profile-icon img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/* Banner styles */
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #e0f7fa;
+  margin-bottom: 20px;
+}
+
+.banner-text {
+  max-width: 600px;
+}
+
+.banner-text h1 {
+  font-size: 36px;
+  color: #333;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+.buttons .btn {
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.buttons .btn.learn-more {
+  background-color: #007bff;
+}
+
+.buttons .btn:hover {
+  opacity: 0.8;
+}
+
+.banner img {
+  max-width: 500px;
+  border-radius: 8px;
+}
+
+/* Categories styles */
+.categories {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.category {
+  text-align: center;
+}
+
+.category img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.category p {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Healthy Habits Guide styles */
+.healthy-habits {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.healthy-habits h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #5cb85c;
+}
+
+.habit-guides {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.habit {
+  margin: 10px;
+}
+
+.habit img {
+  width: 200px;
+  height: 150px;
+  border-radius: 8px;
+}

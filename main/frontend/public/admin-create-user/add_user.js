@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Handle form submission
   const form = document.getElementById("add-user-form");
+
   form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
@@ -21,7 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create user");
+        const errorData = await response.json();
+        throw new Error(`Failed to create user: ${errorData.msg}`);
       }
 
       const result = await response.json();
@@ -32,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // window.location.href = 'manage_users.html';
     } catch (error) {
       console.error("Error:", error);
-      alert("Error creating user");
+      alert("Error creating user: " + error.message);
     }
   });
 });

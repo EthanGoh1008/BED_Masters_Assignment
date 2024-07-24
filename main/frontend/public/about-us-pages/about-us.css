@@ -1,0 +1,102 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+  width: 100px; /* Adjust the width as necessary */
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar ul li {
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+  color: #5cb85c;
+}
+
+.profile-icon img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: #ccffcc;
+  padding: 10px 0;
+  border-radius: 8px 8px 0 0;
+}
+
+header h1 {
+  color: #333;
+  margin: 0;
+}
+
+.intro h2 {
+  text-align: center;
+  color: #333;
+  margin: 20px 0;
+}
+
+.mission,
+.impacts {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.mission h3,
+.impacts h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.mission p,
+.impacts p {
+  line-height: 1.6;
+  color: #666;
+  margin: 0 0 15px;
+}
+
+.mission img,
+.impacts img {
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0;
+  border-radius: 8px;
+}
