@@ -118,6 +118,30 @@ body {
   justify-content: space-evenly;
 }
 
+.buttons li {
+  list-style: none; /* Optional: Remove default list styling */
+}
+
+.buttons li a {
+  font-size: larger;
+  margin: 0 1rem;
+  color: white;
+  background: #4caf50;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  width: 400px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+  text-decoration: none; /* Remove underline from links */
+}
+
+.buttons li a:hover {
+  background: #2b7100; /* Optional: Change background color on hover */
+  color: white; /* Ensure the color remains white on hover */
+}
+
 .healthyeating,
 .exerciseroutines,
 .diseaseprevention {
@@ -222,7 +246,11 @@ body {
   margin-top: 30px;
 }
 
-.viewrecipemore {
+.morerecipes li {
+  list-style: none; /* Remove the default list item styling */
+}
+
+.viewrecipemore a {
   background-color: red;
   color: white;
   border: none;
@@ -233,6 +261,11 @@ body {
   text-decoration: none;
   display: inline-block;
   border-radius: 5px;
+}
+
+.viewrecipemore a:hover {
+  background-color: darkred; /* Optional: Change background color on hover */
+  color: white; /* Ensure the color remains white on hover */
 }
 
 .nutrition-tips {
@@ -254,14 +287,18 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  padding: 0; /* Optional: remove padding from the list */
 }
 
-.foodseatmore,
-.foodseatless,
-.nutrigrade {
+.tips-buttons li {
+  list-style: none; /* Remove the default list item styling */
+}
+
+.tips-buttons li a {
+  display: block;
   font-size: medium;
   margin: 0 1rem;
-  color: white;
+  color: white; /* Change font color to white */
   background: darkcyan;
   padding: 0.5rem 1rem;
   border-radius: 5px;
@@ -269,4 +306,10 @@ body {
   width: 400px;
   margin-top: 20px;
   margin-bottom: 5px;
+  text-align: center;
+  text-decoration: none; /* Remove underline from links */
 }
+
+.tips-buttons li a:hover {
+  background: #075252; /* Optional: Change background color on hover */
+  color: white; /* Ensure the color remains white on hover */
