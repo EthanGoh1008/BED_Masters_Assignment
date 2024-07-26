@@ -1,0 +1,226 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  line-height: 1.6;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+  width: 100px; /* Adjust the width as necessary */
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar ul li {
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+  color: #5cb85c;
+}
+
+.profile-icon img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.logo img {
+  height: 70px;
+}
+
+.menuoptions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.home,
+.aboutus,
+.healthyhabits,
+.forum,
+.upcomingevents,
+.currentevents {
+  color: white;
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: skyblue;
+  margin: 15px;
+  border-radius: 10px;
+  padding: 5px;
+  border: none;
+}
+
+/* Specific width for each button */
+.home {
+  width: 65px;
+}
+
+.aboutus {
+  width: 90px;
+}
+
+.healthyhabits {
+  width: 130px;
+}
+
+.forum {
+  width: 65px;
+}
+
+.upcomingevents {
+  width: 155px;
+}
+
+.currentevents {
+  width: 135px;
+}
+
+.live-healthy {
+  text-align: center;
+  background: #e6ffe6;
+  padding: 2rem 0;
+}
+
+.live-healthy h1 {
+  margin-bottom: 1rem;
+  font-size: xx-large;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.buttons li {
+  list-style: none; /* Optional: Remove default list styling */
+}
+
+.buttons li a {
+  font-size: larger;
+  margin: 0 1rem;
+  color: white;
+  background: #4caf50;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  width: 400px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+  text-decoration: none; /* Remove underline from links */
+}
+
+.buttons li a:hover {
+  background: #2b7100; /* Optional: Change background color on hover */
+  color: white; /* Ensure the color remains white on hover */
+}
+
+.healthyeating,
+.exerciseroutines,
+.diseaseprevention {
+  font-size: larger;
+  margin: 0 1rem;
+  color: white;
+  background: #4caf50;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  width: 400px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.logo img {
+  height: 70px;
+}
+
+.overview-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: 0; /* Remove the fixed margin */
+}
+
+.overview-image img {
+  width: 100%;
+  max-width: 800px; /* Increase the maximum width for a larger image */
+  height: auto;
+  border-radius: 5px;
+}
+
+.foods {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Adjust the gap between sections as needed */
+}
+
+.wholegrains,
+.protein,
+.fruitsveg {
+  padding: 2rem;
+  background: #f9f9f9;
+  flex: 1 1 calc(33.333% - 40px); /* Adjusts flex basis and spacing */
+  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+.wholegrains h2,
+.protein h2,
+.fruitsveg h2 {
+  margin-bottom: 1rem;
+}
+
+.wholegrains p,
+.protein p,
+.fruitsveg p {
+  margin-bottom: 20px;
+}
+
+.responsive-img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1024px) {
+  .wholegrains,
+  .protein,
+  .fruitsveg {
+    flex: 1 1 calc(50% - 40px); /* Adjust for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .wholegrains,
+  .protein,
+  .fruitsveg {
+    flex: 1 1 100%; /* Stacks items vertically on small screens */
+  }
+}
