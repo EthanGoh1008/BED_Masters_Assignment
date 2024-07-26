@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Register a new user
 router.post("/register", async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, role } = req.body;
 
   if (!username || !email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
@@ -32,8 +32,9 @@ router.post("/register", async (req, res) => {
       .input("username", sql.VarChar, username)
       .input("email", sql.VarChar, email)
       .input("password", sql.VarChar, hash)
+      .input("role", sql.VarChar, role || "member")
       .query(
-        "INSERT INTO Users (username, email, password) VALUES (@username, @email, @password)"
+        "INSERT INTO Users (username, email, password, role) VALUES (@username, @email, @password, @role)"
       );
 
     res.status(201).json({ msg: "User registered successfully" });
@@ -49,7 +50,7 @@ router.get("/", async (req, res) => {
     const pool = await poolPromise;
     const result = await pool
       .request()
-      .query("SELECT id, username, email FROM Users");
+      .query("SELECT id, username, email ,role FROM Users");
     res.json(result.recordset);
   } catch (err) {
     console.error(err.message);
@@ -58,6 +59,28 @@ router.get("/", async (req, res) => {
 });
 
 // Get user by ID
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const pool = await poolPromise;
+    const result = await pool
+      .request()
+      .input("id", sql.Int, id)
+      .query("SELECT id, username, email, role FROM Users WHERE id = @id");
+
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+// Get user by ID for profile
 router.get("/profile/:userId", async (req, res) => {
   const { userId } = req.params;
 
@@ -92,6 +115,26 @@ router.delete("/:id", async (req, res) => {
       .query("DELETE FROM Users WHERE id = @id");
 
     res.status(200).json({ msg: "User deleted successfully" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+// Update user role
+router.put("/role/:id", async (req, res) => {
+  const { id } = req.params;
+  const { role } = req.body;
+
+  try {
+    const pool = await poolPromise;
+    await pool
+      .request()
+      .input("id", sql.Int, id)
+      .input("role", sql.VarChar, role)
+      .query("UPDATE Users SET role = @role WHERE id = @id");
+
+    res.status(200).json({ msg: "User role updated successfully" });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
@@ -173,6 +216,52 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "0.1h",
+    });
+
+    res.status(200).json({ token });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.post("/admin-login", async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ msg: "Please enter all fields" });
+  }
+
+  try {
+    const pool = await poolPromise;
+    const result = await pool
+      .request()
+      .input("email", sql.VarChar, email)
+      .query("SELECT * FROM Users WHERE email = @email");
+
+    if (result.recordset.length === 0) {
+      return res.status(401).json({ msg: "Invalid credentials" });
+    }
+
+    const user = result.recordset[0];
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ msg: "Invalid credentials" });
+    }
+
+    if (user.role !== "admin") {
+      return res.status(403).json({ msg: "Access denied" });
+    }
+
+    const payload = {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "1h",
     });
 
     res.status(200).json({ token });

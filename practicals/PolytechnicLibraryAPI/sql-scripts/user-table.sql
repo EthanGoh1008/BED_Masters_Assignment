@@ -4,3 +4,7 @@ CREATE TABLE Users (
     passwordHash VARCHAR(255) NOT NULL,
     role VARCHAR(20) CHECK (role IN ('member', 'librarian')) NOT NULL
 );
+
+ALTER TABLE Users
+ADD role NVARCHAR(50) NOT NULL DEFAULT 'member';
+

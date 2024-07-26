@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile Information</title>
-  <link rel="stylesheet" href="personal-info-styles.css">
-</head>
-<body>
-  <div class="container">
-    <div class="profile-form">
-      <h2>Profile Information</h2>
-      <form id="profile-form">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" class="form-control" disabled>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" class="form-control" disabled>
-        </div>
-        <div class="form-group">
-          <label for="about-myself">About Myself</label>
-          <textarea id="about-myself" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="preferred-event">Preferred Event</label>
-          <select id="preferred-event" class="form-control">
-            <option value="">Select an Event</option>
-            <option value="Event 1">Event 1</option>
-            <option value="Event 2">Event 2</option>
-            <option value="Event 3">Event 3</option>
-          </select>
-        </div>
-        <button type="button" id="update-button" class="btn btn-primary">Update</button>
-      </form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Information</title>
+    <link rel="stylesheet" href="personal-info-styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="profile-form">
+        <h2>Profile Information</h2>
+        <form id="profile-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" class="form-control" disabled />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" disabled />
+          </div>
+          <div class="form-group">
+            <label for="about-myself">About Myself</label>
+            <textarea id="about-myself" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="preferred-event">Preferred Event</label>
+            <select id="preferred-event" class="form-control">
+              <option value="">Select an Event</option>
+              <option value="Event 1">Webinar</option>
+              <option value="Event 2">Live-Event</option>
+              <option value="Event 3">Online-Guide-Training</option>
+            </select>
+          </div>
+          <button type="button" id="update-button" class="btn btn-primary">
+            Update
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
-  <script src="personal-info-scripts.js"></script>
-</body>
+    <script src="personal-info-scripts.js"></script>
+  </body>
 </html>
