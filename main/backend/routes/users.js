@@ -2,8 +2,10 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { poolPromise, sql } = require("../dbConfig");
+const { auth, authorizeRoles } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
+
 
 // Register a new user
 router.post("/register", async (req, res) => {
@@ -44,6 +46,97 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ msg: "Please enter all fields" });
+  }
+
+  try {
+    const pool = await poolPromise;
+    const result = await pool
+      .request()
+      .input("email", sql.VarChar, email)
+      .query("SELECT * FROM Users WHERE email = @Email");
+
+    if (result.recordset.length === 0) {
+      return res.status(401).json({ msg: "Invalid credentials" });
+    }
+
+    const user = result.recordset[0];
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ msg: "Invalid credentials" });
+    }
+
+    const payload = {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.status(200).json({ token });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.post("/admin-login", async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ msg: "Please enter all fields" });
+  }
+
+  try {
+    const pool = await poolPromise;
+    const result = await pool
+      .request()
+      .input("email", sql.VarChar, email)
+      .query("SELECT * FROM Users WHERE email = @email");
+
+    if (result.recordset.length === 0) {
+      return res.status(401).json({ msg: "Invalid credentials" });
+    }
+
+    const user = result.recordset[0];
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ msg: "Invalid credentials" });
+    }
+
+    if (user.role !== "admin") {
+      return res.status(403).json({ msg: "Access denied" });
+    }
+
+    const payload = {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+      username: user.username,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.status(200).json({ token });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.use(auth);
+
 // Other routes (login, get user by ID, update user, delete user) go here...
 router.get("/", async (req, res) => {
   try {
@@ -80,6 +173,44 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Update user
+router.put("/users/:id", async (req, res) => {
+  const { id } = req.params;
+  const { username, email, password, role } = req.body;
+
+  try {
+    const pool = await poolPromise;
+    const request = pool.request();
+
+    let query = "UPDATE Users SET ";
+    if (username) {
+      query += "username = @username, ";
+      request.input("username", sql.VarChar, username);
+    }
+    if (email) {
+      query += "email = @Email, ";
+      request.input("email", sql.VarChar, email);
+    }
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      query += "password = @Password, ";
+      request.input("password", sql.VarChar, hashedPassword);
+    }
+    if (role) {
+      query += "role = @Role, ";
+      request.input("role", sql.VarChar, role);
+    }
+    query = query.slice(0, -2); // Remove the last comma
+    query += " WHERE id = @id";
+    request.input("id", sql.Int, id);
+
+    await request.query(query);
+    res.status(200).json({ msg: "User updated successfully" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
 // Get user by ID for profile
 router.get("/profile/:userId", async (req, res) => {
   const { userId } = req.params;
@@ -183,130 +314,8 @@ router.put("/profile/:userId", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(400).json({ msg: "Please enter all fields" });
-  }
 
-  try {
-    const pool = await poolPromise;
-    const result = await pool
-      .request()
-      .input("email", sql.VarChar, email)
-      .query("SELECT * FROM Users WHERE email = @Email");
-
-    if (result.recordset.length === 0) {
-      return res.status(401).json({ msg: "Invalid credentials" });
-    }
-
-    const user = result.recordset[0];
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(401).json({ msg: "Invalid credentials" });
-    }
-
-    const payload = {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-    };
-
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "0.1h",
-    });
-
-    res.status(200).json({ token });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
-  }
-});
-
-router.post("/admin-login", async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ msg: "Please enter all fields" });
-  }
-
-  try {
-    const pool = await poolPromise;
-    const result = await pool
-      .request()
-      .input("email", sql.VarChar, email)
-      .query("SELECT * FROM Users WHERE email = @email");
-
-    if (result.recordset.length === 0) {
-      return res.status(401).json({ msg: "Invalid credentials" });
-    }
-
-    const user = result.recordset[0];
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(401).json({ msg: "Invalid credentials" });
-    }
-
-    if (user.role !== "admin") {
-      return res.status(403).json({ msg: "Access denied" });
-    }
-
-    const payload = {
-      id: user.id,
-      email: user.email,
-      role: user.role,
-      username: user.username,
-    };
-
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
-
-    res.status(200).json({ token });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
-  }
-});
-
-// Update a user
-router.put("/users/:id", async (req, res) => {
-  const { username, email, password, role } = req.body;
-  const userId = req.params.id;
-
-  if (!username || !email || !role) {
-    return res.status(400).json({ msg: "Please enter all fields" });
-  }
-
-  try {
-    const pool = await poolPromise;
-    const request = pool.request().input("id", sql.Int, userId);
-
-    let query =
-      "UPDATE Users SET username = @username, email = @Email, role = @Role";
-    request.input("username", sql.VarChar, username);
-    request.input("email", sql.VarChar, email);
-    request.input("role", sql.VarChar, role);
-
-    if (password) {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      query += ", password = @Password";
-      request.input("password", sql.VarChar, hashedPassword);
-    }
-
-    query += " WHERE id = @id";
-
-    await request.query(query);
-
-    res.status(200).json({ msg: "User updated successfully" });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
-  }
-});
 
 // Export the router
 module.exports = router;
