@@ -22,12 +22,11 @@
     <div class="main-content">
       <div class="header">
         <div class="welcome">
-          <h1>Add User</h1>
+          <h1>Add Users</h1>
         </div>
         <div class="user-info">
-          <img src="notification.png" alt="Notifications" />
-          <span>Alexia</span>
-          <img src="user-icon.png" alt="User Icon" />
+          <span>Username</span>
+          <img src="..\images\personal-info-icon.png" alt="User Icon" />
         </div>
       </div>
       <div class="add-user">
@@ -44,6 +43,13 @@
           <div class="form-group">
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required />
+          </div>
+          <div class="form-group">
+            <label for="role">Role</label>
+            <select id="role" name="role" required>
+              <option value="member">Member</option>
+              <option value="admin">Admin</option>
+            </select>
           </div>
           <button type="submit">Create</button>
         </form>

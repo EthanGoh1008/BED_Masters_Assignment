@@ -258,6 +258,7 @@ router.post("/admin-login", async (req, res) => {
       id: user.id,
       email: user.email,
       role: user.role,
+      username: user.username,
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
@@ -265,6 +266,42 @@ router.post("/admin-login", async (req, res) => {
     });
 
     res.status(200).json({ token });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+// Update a user
+router.put("/users/:id", async (req, res) => {
+  const { username, email, password, role } = req.body;
+  const userId = req.params.id;
+
+  if (!username || !email || !role) {
+    return res.status(400).json({ msg: "Please enter all fields" });
+  }
+
+  try {
+    const pool = await poolPromise;
+    const request = pool.request().input("id", sql.Int, userId);
+
+    let query =
+      "UPDATE Users SET username = @username, email = @Email, role = @Role";
+    request.input("username", sql.VarChar, username);
+    request.input("email", sql.VarChar, email);
+    request.input("role", sql.VarChar, role);
+
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      query += ", password = @Password";
+      request.input("password", sql.VarChar, hashedPassword);
+    }
+
+    query += " WHERE id = @id";
+
+    await request.query(query);
+
+    res.status(200).json({ msg: "User updated successfully" });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
