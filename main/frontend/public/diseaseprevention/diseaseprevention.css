@@ -197,20 +197,20 @@ body {
   border-radius: 5px;
 }
 
-.routineplans {
+.healthmeasures {
   width: 90%;
   margin: auto;
   text-align: center;
 }
 
-.routines {
+.measures {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
 }
 
-.routine {
+.measure {
   position: relative;
   flex: 1 1 calc(33.333% - 20px);
   margin: 10px;
@@ -219,18 +219,18 @@ body {
   height: 300px; /* Set a fixed height for the routine container */
 }
 
-.routine img {
+.measure img {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Ensure the image covers the entire container */
   transition: transform 0.3s ease;
 }
 
-.routine:hover img {
+.measure:hover img {
   transform: scale(1.1);
 }
 
-.routine span {
+.measure span {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -243,18 +243,18 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.routine:hover span {
+.measure:hover span {
   opacity: 1;
 }
 
 @media (max-width: 768px) {
-  .routine {
+  .measure {
     flex: 1 1 calc(50% - 20px);
   }
 }
 
 @media (max-width: 480px) {
-  .routine {
+  .measure {
     flex: 1 1 100%;
   }
 }
