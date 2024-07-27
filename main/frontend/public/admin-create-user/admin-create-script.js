@@ -82,3 +82,5 @@ function openEditModal(user) {
   const editUrl = `edit_user.html?id=${user.id}&username=${user.username}&email=${user.email}`;
   window.location.href = editUrl;
 }
+
+

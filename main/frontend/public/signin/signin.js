@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Handle sign-in form submission
   document
     .getElementById("sign-in-button")
     .addEventListener("click", async function (event) {
@@ -10,18 +9,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (email && password) {
         try {
-          const response = await fetch("http://localhost:3000/api/users/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-          });
+          const response = await fetch(
+            "http://localhost:3000/api/users/login",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, password }),
+            }
+          );
 
           const data = await response.json();
 
           if (response.ok) {
             localStorage.setItem("token", data.token);
+            localStorage.setItem("userId", data.user.id); // Save userId to local storage
             alert("Login successful");
             window.location.href = "../main-page/main-page.html"; // Redirect to main menu
           } else {
@@ -45,7 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const username = document.getElementById("sign-up-user").value;
       const email = document.getElementById("sign-up-email").value;
       const password = document.getElementById("sign-up-pass").value;
-      const repeatPassword = document.getElementById("sign-up-repeat-pass").value;
+      const repeatPassword = document.getElementById(
+        "sign-up-repeat-pass"
+      ).value;
 
       if (!username || !email || !password || !repeatPassword) {
         alert("Please fill in all fields.");
@@ -58,26 +63,32 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       try {
-        const response = await fetch("http://localhost:3000/api/users/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, email, password }),
-        });
+        const response = await fetch(
+          "http://localhost:3000/api/users/register",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, email, password }),
+          }
+        );
 
         const data = await response.json();
 
         if (response.ok) {
           alert("Registration successful");
           // Optionally log the user in automatically after registration
-          const loginResponse = await fetch("http://localhost:3000/api/users/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-          });
+          const loginResponse = await fetch(
+            "http://localhost:3000/api/users/login",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, password }),
+            }
+          );
           const loginData = await loginResponse.json();
           if (loginResponse.ok) {
             localStorage.setItem("token", loginData.token);

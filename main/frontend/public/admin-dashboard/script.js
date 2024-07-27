@@ -50,8 +50,9 @@ function displayUsername() {
   console.log("Retrieved username:", username);
   if (username) {
     document.querySelector(".user-info span").textContent = username;
+    document.getElementById("username-display").textContent = username;
   } else {
     document.querySelector(".user-info span").textContent = "No user";
+    document.getElementById("username-display").textContent = "No user";
   }
 }
-

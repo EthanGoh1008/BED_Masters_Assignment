@@ -82,7 +82,7 @@ router.post("/login", async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.status(200).json({ token });
+    res.status(200).json({ token,user: payload });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
@@ -130,7 +130,7 @@ router.post("/admin-login", async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.status(200).json({ token });
+    res.status(200).json({ token ,user: payload });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
