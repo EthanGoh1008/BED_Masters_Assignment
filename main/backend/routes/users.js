@@ -214,7 +214,7 @@ router.put("/users/:id", async (req, res) => {
   }
 });
 // Get user by ID for profile
-router.get("/profile/:userId", auth, async (req, res) => {
+router.get("/profile/:userId",auth, async (req, res) => {
   const { userId } = req.params;
 
   try {
@@ -255,7 +255,7 @@ router.delete("/:id",auth, async (req, res) => {
 });
 
 // Update user role
-router.put("/role/:id",auth, async (req, res) => {
+router.put("/role/:id", async (req, res) => {
   const { id } = req.params;
   const { role } = req.body;
 
@@ -274,7 +274,7 @@ router.put("/role/:id",auth, async (req, res) => {
   }
 });
 
-router.put("/profile/:userId",auth, async (req, res) => {
+router.put("/profile/:userId", async (req, res) => {
   const { userId } = req.params;
   const { aboutMyself, preferredEvent } = req.body;
 
