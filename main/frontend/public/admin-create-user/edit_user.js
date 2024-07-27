@@ -34,6 +34,13 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Request URL:", `http://localhost:3000/api/users/${userId}`);
     console.log("Request Body:", JSON.stringify(userData));
 
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("No token found, authorization denied");
+      return;
+    }
+
     try {
       const response = await fetch(
         `http://localhost:3000/api/users/put/${userId}`,
@@ -41,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
           },
           body: JSON.stringify(userData),
         }

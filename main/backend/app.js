@@ -11,7 +11,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger-output.json"); // Import generated spec
-const { auth, authorizeRoles } = require('./middlewares/authMiddleware');
+const { auth } = require('./middlewares/authMiddleware');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

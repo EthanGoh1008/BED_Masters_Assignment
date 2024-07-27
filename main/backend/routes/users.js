@@ -137,7 +137,7 @@ router.post("/admin-login", async (req, res) => {
 });
 
 // Other routes (login, get user by ID, update user, delete user) go here...
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const pool = await poolPromise;
     const result = await pool
@@ -173,7 +173,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Update user
-router.put("/put/:id", async (req, res) => {
+router.put("/put/:id",auth, async (req, res) => {
   console.log(`PUT request received for user ID: ${req.params.id}`);
   console.log("Request Body:", req.body);
   const { id } = req.params;
@@ -214,7 +214,7 @@ router.put("/put/:id", async (req, res) => {
 });
 
 // Get user by ID for profile
-router.get("/profile/:userId", async (req, res) => {
+router.get("/profile/:userId",auth, async (req, res) => {
   const { userId } = req.params;
 
   try {
@@ -237,7 +237,7 @@ router.get("/profile/:userId", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id",auth, async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -274,7 +274,7 @@ router.put("/role/:id", async (req, res) => {
   }
 });
 
-router.put("/profile/:userId", async (req, res) => {
+router.put("/profile/:userId",auth, async (req, res) => {
   const { userId } = req.params;
   const { aboutMyself, preferredEvent } = req.body;
 

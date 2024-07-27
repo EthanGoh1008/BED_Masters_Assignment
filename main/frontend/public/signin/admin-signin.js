@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           if (response.ok) {
             localStorage.setItem("token", data.token);
-            localStorage.setItem("username", data.user.username); // Store the username correctly
+            localStorage.setItem("username", data.user.username); // Store the username
             console.log("Stored username:", data.user.username);
             alert("Login successful");
             window.location.href = "../admin-dashboard/index.html"; // Redirect to admin dashboard page

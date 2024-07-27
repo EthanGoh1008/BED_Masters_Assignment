@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const loginData = await loginResponse.json();
           if (loginResponse.ok) {
             localStorage.setItem("token", loginData.token);
-            window.location.href = "../main-page/main-page.html"; // Redirect to main menu
+            window.location.href = "signin.html"; 
           } else {
             alert(loginData.msg || "Login failed after registration");
           }
