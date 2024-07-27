@@ -24,8 +24,13 @@
                 >
               </li>
               <li><a href="..\forum\forum.html">Forum</a></li>
+<<<<<<< HEAD
               <li><a href="..\events\events.html">Upcoming Events</a></li>
               <li><a href="#">Current Challenges</a></li>
+=======
+              <li><a href="#">Upcoming Events</a></li>
+              <li><a href="../currentchallenges/currentchallenges.html">Current Challenges</a></li>
+>>>>>>> 696b37c24195355270f6d361b504b5a3d3c02bb8
             </ul>
             <a href="..\personal-inform-pages\personal-inform.html">
               <div class="profile-icon">
@@ -38,12 +43,22 @@
     <main>
         <section class="live-healthy">
             <h1>LIVE HEALTHY</h1>
-            <div class="buttons">
-                <button class="healthyeating" onclick="showHealthyEating()">Healthy Eating</button>
-                <button class="exerciseroutines" onclick="showExerciseRoutines()">Exercise Routines</button>
-                <button class="diseaseprevention" onclick="showDiseasePrevention()">Disease Prevention</button>
-            </div>
-        </section>
+            <ul class="buttons">
+              <li class="healthyeating">
+                <a href="..\healthyeating\healthyeating.html">Healthy Eating</a>
+              </li>
+              <li class="exerciseroutines">
+                <a href="..\exerciseroutines\exerciseroutines.html"
+                  >Exercise Routines</a
+                >
+              </li>
+              <li class="diseaseprevention">
+                <a href="..\diseaseprevention\diseaseprevention.html"
+                  >Disease Prevention</a
+                >
+              </li>
+            </ul>
+          </section>
         <section class="overview">
             <h2>Overview</h2>
             <div class="overview-content">
@@ -61,7 +76,7 @@
                     <p>*Recommended plate is 10 inch in diameter</p>
                 </div>
                 <div class="overview-image">
-                    <img src="imagesmainpage/healthyplate.png" alt="Healthy Plate">
+                    <img src="../images/healthyplate.png" alt="Healthy Plate">
                 </div>
             </div>
         </section>
@@ -69,36 +84,29 @@
             <h2>Recipes</h2>
             <div class="recipe-cards">
                 <div class="recipe-card">
-                    <img src="imagesmainpage/braised-chicken-bee-hoon.jpg" alt="Braised Chicken Bee Hoon">
+                    <img src="../images/braised-chicken-bee-hoon.jpg" alt="Braised Chicken Bee Hoon">
                     <h3>Braised Chicken Bee Hoon</h3>
                     <button class="viewrecipebcbh" onclick="showBCBH()">View Recipe</button>
                 </div>
                 <div class="recipe-card">
-                    <img src="imagesmainpage/brown-chicken-rice.jpg" alt="Brown Chicken Rice">
+                    <img src="../images/brown-chicken-rice.jpg" alt="Brown Chicken Rice">
                     <h3>Brown Chicken Rice</h3>
                     <button class="viewrecipebcr" onclick="showBCR()">View Recipe</button>
                 </div>
                 <div class="recipe-card">
-                    <img src="imagesmainpage/char-kway-teow.jpg" alt="Char Kway Teow">
+                    <img src="../images/char-kway-teow.jpg" alt="Char Kway Teow">
                     <h3>Char Kway Teow</h3>
                     <button class="viewrecipeckt" onclick="showCKT()">View Recipe</button>
                 </div>
             </div>
             <div class="morerecipes">
-                <button class="viewrecipemore" onclick="showMoreRecipes()">More Recipes Here</button>
-            </div>
-        </section>
-        <section class="nutrition-tips">
-            <h2>Nutrition Tips</h2>
-            <p>Incorporate a range of entire foods, such as fruits, vegetables, lean meats, whole grains, and healthy fats, into your diet for a well-rounded and nutrient-dense intake. Eat as much vegetables as possible to provide a wide variety of vitamins and minerals. Drink lots of water to stay hydrated, and cut less on processed meals, sugar, and high-sodium snacks. Maintaining a healthy weight and enhancing digestion can also be achieved through mindful eating practices including slowing down and observing hunger cues.</p>
-            <div class="tips-buttons">
-                <button class="foodseatmore" onclick="showFoodsEatMore()">Foods That You Need To Eat More</button>
-                <button class="foodseatless" onclick="showFoodsEatLess()">Foods That You Need To Eat Less</button>
-                <button class="nutrigrade" onclick="showNutriGrade()">Nutri-Grade Guide For Drinks</button>
+                <ul>
+                    <li class="viewrecipemore">
+                        <a href="../recipes/morerecipespage.html">More Recipes</a>
+                    </li>
+                </ul>
             </div>
         </section>
     </main>
-
-<script src="livehealthymp.js"></script>
 </body>
 </html>

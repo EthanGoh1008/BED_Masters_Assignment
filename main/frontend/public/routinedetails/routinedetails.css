@@ -1,0 +1,201 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  line-height: 1.6;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+  width: 100px; /* Adjust the width as necessary */
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar ul li {
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+  color: #5cb85c;
+}
+
+.profile-icon img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.menuoptions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.home,
+.aboutus,
+.healthyhabits,
+.forum,
+.upcomingevents,
+.currentevents {
+  color: white;
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: skyblue;
+  margin: 15px;
+  border-radius: 10px;
+  padding: 5px;
+  border: none;
+}
+
+/* Specific width for each button */
+.home {
+  width: 65px;
+}
+
+.aboutus {
+  width: 90px;
+}
+
+.healthyhabits {
+  width: 130px;
+}
+
+.forum {
+  width: 65px;
+}
+
+.upcomingevents {
+  width: 155px;
+}
+
+.currentevents {
+  width: 135px;
+}
+
+.live-healthy {
+  text-align: center;
+  background: #e6ffe6;
+  padding: 2rem 0;
+}
+
+.live-healthy h1 {
+  margin-bottom: 1rem;
+  font-size: xx-large;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.buttons li {
+  list-style: none; /* Optional: Remove default list styling */
+}
+
+.buttons li a {
+  font-size: larger;
+  margin: 0 1rem;
+  color: white;
+  background: #4caf50;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  width: 400px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+  text-decoration: none; /* Remove underline from links */
+}
+
+.buttons li a:hover {
+  background: #2b7100; /* Optional: Change background color on hover */
+  color: white; /* Ensure the color remains white on hover */
+}
+
+.healthyeating,
+.exerciseroutines,
+.diseaseprevention {
+  font-size: larger;
+  margin: 0 1rem;
+  color: white;
+  background: #4caf50;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  width: 400px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.information {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.information img {
+  display: block;
+  margin: 0 auto 20px;
+  width: 100%;
+  max-width: 1400px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.information h2 {
+  font-size: 2em;
+  margin: 0 0 20px 0;
+}
+
+.information p {
+  margin: 0 0 20px 0;
+}
+
+.information ul {
+  list-style-type: disc;
+  margin: 10px 0 0 20px;
+  padding: 0;
+}
+
+.information ul li {
+  margin-bottom: 10px;
+}
+
+@media (min-width: 1024px) {
+  .information h2 {
+    font-size: 2.5em;
+  }
+}

@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Handle sign-in form submission
   document
     .getElementById("sign-in-button")
     .addEventListener("click", async function (event) {
@@ -9,16 +10,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (email && password) {
         try {
-          const response = await fetch(
-            "http://localhost:3000/api/users/login",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ email, password }),
-            }
-          );
+          const response = await fetch("http://localhost:3000/api/users/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          });
 
           const data = await response.json();
 
@@ -37,64 +35,62 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Please fill in all fields.");
       }
     });
-});
 
-document
-  .getElementById("sign-up-button")
-  .addEventListener("click", async function (event) {
-    event.preventDefault();
+  // Handle sign-up form submission
+  document
+    .getElementById("sign-up-button")
+    .addEventListener("click", async function (event) {
+      event.preventDefault();
 
-    const username = document.getElementById("sign-up-user").value;
-    const email = document.getElementById("sign-up-email").value;
-    const password = document.getElementById("sign-up-pass").value;
-    const repeatPassword = document.getElementById("sign-up-repeat-pass").value;
+      const username = document.getElementById("sign-up-user").value;
+      const email = document.getElementById("sign-up-email").value;
+      const password = document.getElementById("sign-up-pass").value;
+      const repeatPassword = document.getElementById("sign-up-repeat-pass").value;
 
-    if (!username || !email || !password || !repeatPassword) {
-      alert("Please fill in all fields.");
-      return;
-    }
+      if (!username || !email || !password || !repeatPassword) {
+        alert("Please fill in all fields.");
+        return;
+      }
 
-    if (password !== repeatPassword) {
-      alert("Passwords do not match.");
-      return;
-    }
+      if (password !== repeatPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
 
-    try {
-      const response = await fetch("http://localhost:3000/api/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, email, password }),
-      });
+      try {
+        const response = await fetch("http://localhost:3000/api/users/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, email, password }),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (response.ok) {
-        alert("Registration successful");
-        // Optionally log the user in automatically after registration
-        const loginResponse = await fetch(
-          "http://localhost:3000/api/users/login",
-          {
+        if (response.ok) {
+          alert("Registration successful");
+          // Optionally log the user in automatically after registration
+          const loginResponse = await fetch("http://localhost:3000/api/users/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ email, password }),
+          });
+          const loginData = await loginResponse.json();
+          if (loginResponse.ok) {
+            localStorage.setItem("token", loginData.token);
+            window.location.href = "../main-page/main-page.html"; // Redirect to main menu
+          } else {
+            alert(loginData.msg || "Login failed after registration");
           }
-        );
-        const loginData = await loginResponse.json();
-        if (loginResponse.ok) {
-          localStorage.setItem("token", loginData.token);
-          window.location.href = "../main-page/main-page.html"; // Redirect to main menu
         } else {
-          alert(loginData.msg || "Login failed after registration");
+          alert(data.msg || "Registration failed");
         }
-      } else {
-        alert(data.msg || "Registration failed");
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Registration failed");
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Registration failed");
-    }
-  });
+    });
+});

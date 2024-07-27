@@ -29,6 +29,7 @@
     "jsonwebtoken": "^9.0.2",
     "mssql": "^11.0.1",
     "swagger-autogen": "^2.23.7",
+    "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "tedious": "^18.3.0"
 >>>>>>> 6cfcf1d14382b7a4c4c808b6247562aa815beadc
