@@ -11,4 +11,19 @@ At **Healthy Life SEA**, we believe that health and wellness should be accessibl
 Whether you're looking to improve your diet, find a new workout routine, or simply connect with others interested in healthy living, **Healthy Life SEA** is here to support you every step of the way. Let's work together to build a healthier future for Southeast Asia!
 
 ## Credits
-
+* lottie
+* bootstrap
+* swagger
+* DALL-E
+* https://www.youtube.com/watch?v=Y8HIFRPU6pM
+* https://www.youtube.com/watch?v=YOmC5Tyk-nU
+* https://stock.adobe.com/my/search?k=person+icon
+* https://www.flaticon.com/free-icon/bell-ring_7167256
+* youtube
+* Mssql
+* JWT.IO
+* https://www.youtube.com/watch?v=XBu54nfzxAQ
+* https://www.youtube.com/watch?v=xKs2IZZya7c&list=PLChiukrA-RMOEB1PRQqB1NITIRsDz9pIN&index=7
+* https://www.youtube.com/watch?v=MpQbwtSiZ7E&list=PLChiukrA-RMOEB1PRQqB1NITIRsDz9pIN&index=8
+* https://www.youtube.com/watch?v=DBMPXJJfQEA
+* https://www.youtube.com/watch?v=y99YgaQjgx4
