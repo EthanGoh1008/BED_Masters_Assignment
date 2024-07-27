@@ -1,3 +1,5 @@
+--Zhan Yang database
+
 --Create Table
 CREATE TABLE dbo.Users (
     id INT PRIMARY KEY IDENTITY(1,1),
