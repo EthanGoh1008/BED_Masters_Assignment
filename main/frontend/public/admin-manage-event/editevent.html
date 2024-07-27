@@ -37,14 +37,15 @@
         <form id="edit-event-form" enctype="multipart/form-data">
           <div class="form-group">
             <label for="event-image">Upload Image</label>
-            <input type="file" id="event-image" name="event-image" />
-          </div>
-          <div class="form-group">
-            <img
-              id="event-image-preview"
-              src="event_image_url"
-              alt="Event Image"
-            />
+            <div class="file-upload">
+                <input type="file" id="event-image" name="event-image" />
+                <label for="event-image" class="file-label">Choose File</label>
+            </div>
+            <div class="form-group">
+                <img id="event-image-preview" src="event_image_url" alt="Event Image" />
+            </div>
+        </div>
+        
           </div>
           <div class="form-group">
             <label for="title">Title</label>
