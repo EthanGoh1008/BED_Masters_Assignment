@@ -213,6 +213,7 @@ router.put("/users/:id", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
+
 // Get user by ID for profile
 router.get("/profile/:userId", async (req, res) => {
   const { userId } = req.params;

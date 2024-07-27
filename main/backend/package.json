@@ -10,16 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "express": "^4.19.2",
-    "joi": "^17.13.3",
-    "mssql": "^11.0.0",
-    "mysql": "^2.18.1"
-=======
-
->>>>>>> 82c9f538f092da52d731aa1eba3aaacf6ad41e68
-=======
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -32,6 +22,5 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "tedious": "^18.3.0"
->>>>>>> 6cfcf1d14382b7a4c4c808b6247562aa815beadc
   }
 }
