@@ -50,10 +50,6 @@ body {
   border-radius: 50%;
 }
 
-.logo img {
-  height: 70px;
-}
-
 .menuoptions {
   display: flex;
   flex-wrap: wrap;
@@ -155,10 +151,6 @@ body {
   width: 400px;
   margin-top: 10px;
   margin-bottom: 15px;
-}
-
-.logo img {
-  height: 70px;
 }
 
 body {
