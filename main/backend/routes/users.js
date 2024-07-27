@@ -46,6 +46,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
+//login user
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -88,6 +89,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//admin login
 router.post("/admin-login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -135,10 +137,10 @@ router.post("/admin-login", async (req, res) => {
   }
 });
 
-router.use(auth);
+
 
 // Other routes (login, get user by ID, update user, delete user) go here...
-router.get("/", async (req, res) => {
+router.get("/",auth, async (req, res) => {
   try {
     const pool = await poolPromise;
     const result = await pool
@@ -152,7 +154,7 @@ router.get("/", async (req, res) => {
 });
 
 // Get user by ID
-router.get("/:id", async (req, res) => {
+router.get("/:id",auth, async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -212,7 +214,7 @@ router.put("/users/:id", async (req, res) => {
   }
 });
 // Get user by ID for profile
-router.get("/profile/:userId", async (req, res) => {
+router.get("/profile/:userId", auth, async (req, res) => {
   const { userId } = req.params;
 
   try {
@@ -235,7 +237,7 @@ router.get("/profile/:userId", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id",auth, async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -253,7 +255,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 // Update user role
-router.put("/role/:id", async (req, res) => {
+router.put("/role/:id",auth, async (req, res) => {
   const { id } = req.params;
   const { role } = req.body;
 
@@ -272,7 +274,7 @@ router.put("/role/:id", async (req, res) => {
   }
 });
 
-router.put("/profile/:userId", async (req, res) => {
+router.put("/profile/:userId",auth, async (req, res) => {
   const { userId } = req.params;
   const { aboutMyself, preferredEvent } = req.body;
 
@@ -314,6 +316,12 @@ router.put("/profile/:userId", async (req, res) => {
   }
 });
 
+
+
+// Protecting a route with the auth middleware
+router.get("/protected-route", auth, (req, res) => {
+  res.send("This is a protected route");
+});
 
 
 
