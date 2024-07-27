@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Forum</title>
+    <link rel="stylesheet" href="addforum.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>HL SEA Admin</h2>
+      <ul>
+        <li><a href="..\admin-dashboard\index.html">Dashboard</a></li>
+        <li>
+          <a href="..\admin-create-user\admin-create.html">Manage Users</a>
+        </li>
+        <li><a href="#">Content</a></li>
+        <li><a href="#">Event</a></li>
+        <li><a href="#">Challenges</a></li>
+        <li><a href="#">Forum</a></li>
+        <li class="logout"><a href="#">Log out</a></li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <div class="header">
+        <div class="welcome">
+          <h1>Add Forum</h1>
+        </div>
+        <div class="user-info">
+          <img src="notification.png" alt="Notifications" />
+          <span>Alexia</span>
+          <img src="user-icon.png" alt="User Icon" />
+        </div>
+      </div>
+      <div class="add-event">
+        <h2>Add Forum</h2>
+        <form id="add-event-form" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="event-image">Upload Image</label>
+            <input type="file" id="event-image" name="event-image" />
+          </div>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" />
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description"></textarea>
+          </div>
+          <button type="submit">Add</button>
+        </form>
+      </div>
+    </div>
+    <script src="admin-create-script.js"></script>
+  </body>
+</html>
