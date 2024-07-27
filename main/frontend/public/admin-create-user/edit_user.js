@@ -27,13 +27,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const userData = {
       username: formData.get("username"),
       email: formData.get("email"),
-      password: formData.get("password"), // This can be empty if the user doesn't want to change the password
+      password: formData.get("password"),
       role: formData.get("role"),
     };
 
+    console.log("Request URL:", `http://localhost:3000/api/users/${userId}`);
+    console.log("Request Body:", JSON.stringify(userData));
+
     try {
       const response = await fetch(
-        `http://localhost:3000/api/users/${userId}`, // Corrected here
+        `http://localhost:3000/api/users/put/${userId}`,
         {
           method: "PUT",
           headers: {
@@ -51,11 +54,10 @@ document.addEventListener("DOMContentLoaded", function () {
       alert(result.msg);
 
       // Redirect to manage users page after update
-      window.location.href = "manage_users.html";
+      window.location.href = "admin-create.html";
     } catch (error) {
       console.error("Error:", error);
       alert("Error updating user");
     }
   });
 });
-
