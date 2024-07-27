@@ -91,7 +91,7 @@ body {
 }
 
 /* Add Forum section styling */
-.edit-event {
+.add-event {
   background: white;
   padding: 25px;
   border-radius: 5px;
@@ -99,7 +99,7 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.edit-event h2 {
+.add-event h2 {
   margin-bottom: 20px;
   font-weight: 600;
   color: #2c3e50;
