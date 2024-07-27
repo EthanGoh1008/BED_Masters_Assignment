@@ -27,3 +27,5 @@ Whether you're looking to improve your diet, find a new workout routine, or simp
 * https://www.youtube.com/watch?v=MpQbwtSiZ7E&list=PLChiukrA-RMOEB1PRQqB1NITIRsDz9pIN&index=8
 * https://www.youtube.com/watch?v=DBMPXJJfQEA
 * https://www.youtube.com/watch?v=y99YgaQjgx4
+* https://bouldersausage.com/healthy-living/what-is-a-healthy-lifestyle/
+  
