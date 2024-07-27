@@ -6,6 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.removeItem("username"); // Clear the username from localStorage
     localStorage.removeItem("email"); // Clear the email from localStorage
     // Redirect to the login page
-    window.location.href = "../signin/signin.html";
+    window.location.href = "../login/loggingopt.html";
   });
 });
