@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Users</title>
+    <link rel="stylesheet" href="adminevent.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>HL SEA Admin</h2>
+      <ul>
+        <li><a href="..\admin-dashboard\index.html">Dashboard</a></li>
+        <li>
+          <a href="..\admin-create-user\admin-create.html">Manage Users</a>
+        </li>
+        <li>Content</li>
+        <li>Event</li>
+        <li>Challenges</li>
+        <li>Forum</li>
+        <li class="logout"><a href="..\login\loggingopt.html">Log out</a></li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <div class="header">
+        <div class="welcome">
+          <h1>Manage Events</h1>
+        </div>
+      </div>
+      <div class="manage-events">
+        <div class="events-list">
+          <h3>Events List</h3>
+          <a href="add_user.html" class="add-user">+</a>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Desc</th>
+              </tr>
+            </thead>
+            <tbody id="user-table-body">
+              <!-- User rows will be dynamically inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src=""></script>
+  </body>
+</html>
