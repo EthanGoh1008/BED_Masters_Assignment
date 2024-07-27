@@ -3,11 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Manage Users</title>
-    <link
-      rel="stylesheet"
-      href="..\admin-create-user\admin-create-styles.css"
-    />
+    <title>Edit Event</title>
+    <link rel="stylesheet" href="editevent.css" />
   </head>
   <body>
     <div class="sidebar">
@@ -17,17 +14,17 @@
         <li>
           <a href="..\admin-create-user\admin-create.html">Manage Users</a>
         </li>
-        <li>Content</li>
-        <li>Event</li>
-        <li>Challenges</li>
-        <li>Forum</li>
-        <li class="logout">Log out</li>
+        <li><a href="#">Content</a></li>
+        <li><a href="#">Event</a></li>
+        <li><a href="#">Challenges</a></li>
+        <li><a href="#">Forum</a></li>
+        <li class="logout"><a href="#">Log out</a></li>
       </ul>
     </div>
     <div class="main-content">
       <div class="header">
         <div class="welcome">
-          <h1>Manage User</h1>
+          <h1>Edit Event</h1>
         </div>
         <div class="user-info">
           <img src="notification.png" alt="Notifications" />
@@ -35,24 +32,62 @@
           <img src="user-icon.png" alt="User Icon" />
         </div>
       </div>
-      <div class="manage-users">
-        <h2>Manage User</h2>
-        <div class="user-list">
-          <h3>User List</h3>
-          <a href="add_user.html" class="add-user">+</a>
-          <table>
-            <thead>
-              <tr>
-                <th>No.</th>
-                <th>Name</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody id="user-table-body">
-              <!-- User rows will be dynamically inserted here -->
-            </tbody>
-          </table>
-        </div>
+      <div class="edit-event">
+        <h2>Edit Event</h2>
+        <form id="edit-event-form" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="event-image">Upload Image</label>
+            <input type="file" id="event-image" name="event-image" />
+          </div>
+          <div class="form-group">
+            <img
+              id="event-image-preview"
+              src="event_image_url"
+              alt="Event Image"
+            />
+          </div>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" />
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="likes">Likes</label>
+            <input type="number" id="likes" name="likes" />
+          </div>
+          <div class="form-group">
+            <label for="participants">Participants</label>
+            <table id="participants-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Name</th>
+                  <th>Option</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1.</td>
+                  <td>Lina</td>
+                  <td>
+                    <button type="button" class="remove-participant">✖</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2.</td>
+                  <td>Jim</td>
+                  <td>
+                    <button type="button" class="remove-participant">✖</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button type="submit">Edit</button>
+        </form>
       </div>
     </div>
     <script src="admin-create-script.js"></script>
