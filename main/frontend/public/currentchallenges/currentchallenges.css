@@ -1,0 +1,204 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  line-height: 1.6;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+  width: 100px; /* Adjust the width as necessary */
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar ul li {
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+  color: #5cb85c;
+}
+
+.profile-icon img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.logo img {
+  height: 70px;
+}
+
+.menuoptions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.home,
+.aboutus,
+.healthyhabits,
+.forum,
+.upcomingevents,
+.currentevents {
+  color: white;
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: skyblue;
+  margin: 15px;
+  border-radius: 10px;
+  padding: 5px;
+  border: none;
+}
+
+/* Specific width for each button */
+.home {
+  width: 65px;
+}
+
+.aboutus {
+  width: 90px;
+}
+
+.healthyhabits {
+  width: 130px;
+}
+
+.forum {
+  width: 65px;
+}
+
+.upcomingevents {
+  width: 155px;
+}
+
+.currentevents {
+  width: 135px;
+}
+
+.currentchallenges {
+  text-align: center;
+  background: #e6ffe6;
+  padding: 2rem 0;
+}
+
+.otherchallenges h1 {
+  margin-bottom: 1rem;
+  font-size: xx-large;
+}
+
+.otherchallenges {
+  text-align: center;
+  background: #e6eeff;
+  padding: 2rem 0;
+}
+
+.currentchallenges h1 {
+  margin-bottom: 1rem;
+  font-size: xx-large;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.quiz-section,
+.other-challenges {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.quiz-section img,
+.running-challenge img {
+  width: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.quiz-content,
+.running-content {
+  padding: 50px;
+}
+
+.quiz-content h2,
+.running-content h4 {
+  margin-top: 0;
+}
+
+.quiz-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.quiz-content ul li {
+  margin: 5px 0;
+}
+
+.join-button {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.join-button a {
+  background-color: #ff7f00;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.join-button a:hover {
+  background-color: #e66a00;
+}
+
+.other-challenges h3 {
+  margin: 20px 20px 0 20px;
+}
+
+.running-challenge {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #ddd;
+}
+
+.running-content {
+  padding: 20px;
+  flex: 1;
+}
