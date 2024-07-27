@@ -1,42 +1,50 @@
 const Forum = require("../models/modelForum");
 
-async function getAllForums(req, res) {
+exports.getAllForums = async (req, res) => {
   try {
     const forums = await Forum.getForums();
     res.json(forums);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error retrieving forums" });
+    console.error("Error retrieving forums:", error.message);
+    res.status(500).send("Server error");
   }
-}
+};
 
-async function createForum(req, res) {
-  const { title, description } = req.body;
+exports.createForum = async (req, res) => {
+  const { title, description, image_url } = req.body;
   try {
-    const newForumId = await Forum.createForum({ title, description });
-    res.status(201).json({ id: newForumId, title, description });
+    const newForumId = await Forum.createForum({
+      title,
+      description,
+      image_url,
+    });
+    res.status(201).json({ id: newForumId, title, description, image_url });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error creating forum" });
   }
-}
+};
 
-async function updateForum(req, res) {
+exports.updateForum = async (req, res) => {
   const forumId = req.params.id;
-  const { title, description } = req.body;
+  const { title, description, image_url } = req.body;
   try {
-    const success = await Forum.updateForum(forumId, { title, description });
+    const success = await Forum.updateForum(forumId, {
+      title,
+      description,
+      image_url,
+    });
     if (!success) {
       return res.status(404).json({ error: "Forum not found" });
     }
-    res.json({ id: forumId, title, description });
+    res.json({ id: forumId, title, description, image_url });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error updating forum" });
   }
-}
+};
 
-async function deleteForum(req, res) {
+exports.deleteForum = async (req, res) => {
   const forumId = req.params.id;
   try {
     const success = await Forum.deleteForum(forumId);
@@ -48,11 +56,4 @@ async function deleteForum(req, res) {
     console.error(error);
     res.status(500).json({ error: "Error deleting forum" });
   }
-}
-
-module.exports = {
-  getAllForums,
-  createForum,
-  updateForum,
-  deleteForum,
 };

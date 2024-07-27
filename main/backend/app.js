@@ -7,6 +7,7 @@ const adminRoutes = require("./routes/admin");
 const forumController = require("./controllers/forumController");
 const validateForum = require("./middlewares/validateForum");
 const eventsRoute = require("./routes/event");
+const forumRoutes = require("./routes/forumroute");
 const { poolPromise } = require("./dbConfig");
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,7 +25,7 @@ app.use("/api/users", usersRoute);
 app.use("/api/admin", adminRoutes);
 
 //Jayden routes
-app.get("/api/forum", forumController.getAllForums);
+app.use("/api/forum", forumRoutes);
 app.post("/api/forum", validateForum, forumController.createForum);
 app.put("/api/forum/:id", validateForum, forumController.updateForum);
 app.delete("/api/forum/:id", forumController.deleteForum);
