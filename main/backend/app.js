@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const usersRoute = require("./routes/users");
+const adminRoutes = require("./routes/admin");
 const forumController = require("./controllers/forumController");
 const validateForum = require("./middlewares/validateForum");
 const { poolPromise } = require("./dbConfig");
@@ -10,14 +11,18 @@ const app = express();
 const port = process.env.PORT || 3000;
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger-output.json"); // Import generated spec
+const { auth, authorizeRoles } = require('./middlewares/authMiddleware');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+//Liew Zhan Yang routes
 app.use("/api/users", usersRoute);
+app.use("/api/admin", adminRoutes); 
 
+//Jayden routes
 app.get("/api/forum", forumController.getAllForums);
 app.post("/api/forum", validateForum, forumController.createForum);
 app.put("/api/forum/:id", validateForum, forumController.updateForum);

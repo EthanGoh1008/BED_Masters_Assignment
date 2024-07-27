@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
       username: formData.get("username"),
       email: formData.get("email"),
       password: formData.get("password"),
+      role: formData.get("role"),
     };
 
     try {

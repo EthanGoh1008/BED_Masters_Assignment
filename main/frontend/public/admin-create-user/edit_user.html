@@ -10,24 +10,25 @@
     <div class="sidebar">
       <h2>HL SEA Admin</h2>
       <ul>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="manage_users.html">Manage Users</a></li>
+        <li><a href="..\admin-dashboard\index.html">Dashboard</a></li>
+        <li>
+          <a href="..\admin-create-user\admin-create.html">Manage Users</a>
+        </li>
         <li>Content</li>
         <li>Event</li>
         <li>Challenges</li>
         <li>Forum</li>
-        <li class="logout">Log out</li>
+        <li class="logout"><a href="..\login\loggingopt.html">Log out</a></li>
       </ul>
     </div>
     <div class="main-content">
       <div class="header">
         <div class="welcome">
-          <h1>Edit User</h1>
+          <h1>Edit Users</h1>
         </div>
         <div class="user-info">
-          <img src="notification.png" alt="Notifications" />
-          <span>Alexia</span>
-          <img src="user-icon.png" alt="User Icon" />
+          <span>Username</span>
+          <img src="..\images\personal-info-icon.png" alt="User Icon" />
         </div>
       </div>
       <div class="add-user">
@@ -45,9 +46,14 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" />
           </div>
-          <a href="..\admin-create-user\admin-create.html">
-            <button type="submit">Edit</button>
-          </a>
+          <div class="form-group">
+            <label for="role">Role</label>
+            <select id="role" name="role" required>
+              <option value="member">Member</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <button type="submit">Edit</button>
         </form>
       </div>
     </div>

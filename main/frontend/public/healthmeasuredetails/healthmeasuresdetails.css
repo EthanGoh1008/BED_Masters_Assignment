@@ -1,0 +1,231 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  line-height: 1.6;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+  width: 100px;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar ul li {
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+  color: #5cb85c;
+}
+
+.profile-icon img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.menuoptions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.home,
+.aboutus,
+.healthyhabits,
+.forum,
+.upcomingevents,
+.currentevents {
+  color: white;
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: skyblue;
+  margin: 15px;
+  border-radius: 10px;
+  padding: 5px;
+  border: none;
+}
+
+/* Specific width for each button */
+.home {
+  width: 65px;
+}
+
+.aboutus {
+  width: 90px;
+}
+
+.healthyhabits {
+  width: 130px;
+}
+
+.forum {
+  width: 65px;
+}
+
+.upcomingevents {
+  width: 155px;
+}
+
+.currentevents {
+  width: 135px;
+}
+
+.live-healthy {
+  text-align: center;
+  background: #e6ffe6;
+  padding: 2rem 0;
+}
+
+.live-healthy h1 {
+  margin-bottom: 1rem;
+  font-size: xx-large;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.buttons li {
+  list-style: none;
+}
+
+.buttons li a {
+  font-size: larger;
+  margin: 0 1rem;
+  color: white;
+  background: #4caf50;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  width: 400px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.buttons li a:hover {
+  background: #2b7100;
+  color: white;
+}
+
+.healthyeating,
+.exerciseroutines,
+.diseaseprevention {
+  font-size: larger;
+  margin: 0 1rem;
+  color: white;
+  background: #4caf50;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  width: 400px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.information {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: auto;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.header-image {
+  position: relative;
+  text-align: center;
+}
+
+.header-image img {
+  width: 100%;
+  height: auto;
+}
+
+.strategy-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.strategy-badge img {
+  width: 150px; /* Adjust size as needed */
+  height: auto;
+}
+
+.information h2 {
+  text-align: center;
+  font-size: 2em;
+  margin: 20px 0;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.column {
+  flex: 1;
+  min-width: 300px;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.column h3 {
+  margin-bottom: 10px;
+}
+
+.column p {
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.column ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+.column:nth-child(1) {
+  background-color: #f9f9f9; /* Light grey */
+}
+
+.column:nth-child(2) {
+  background-color: #e6f7ff; /* Light blue */
+}
+
+.column:nth-child(3) {
+  background-color: #fff0e6; /* Light orange */
+}
