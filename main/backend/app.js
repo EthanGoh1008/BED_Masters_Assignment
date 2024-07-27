@@ -11,7 +11,7 @@ const { poolPromise } = require("./dbConfig");
 const app = express();
 const port = process.env.PORT || 3000;
 const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swagger-output.json"); // Import generated spec
+const swaggerDocument = require("./swagger-output.json");
 const { auth, authorizeRoles } = require("./middlewares/authMiddleware");
 
 app.use(bodyParser.json());
