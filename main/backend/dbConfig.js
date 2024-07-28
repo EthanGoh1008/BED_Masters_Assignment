@@ -1,12 +1,10 @@
 const sql = require("mssql");
 
 const config = {
-  user: "booksapi_users",
-  password: "catlord",
+  user: "recipes_user",
+  password: "foodisgood",
   server: "localhost",
-  database: "bed_db1",
-  JWT_SECRET:
-    "314c0a5fb23ddb01bfd8dd4264e3367a2b8b3cea34b99d691486906190a105debeb1eb764744e02427a0e6369255660c75dcf5652bc218f912a58bed6402f5fe",
+  database: "bed_masters_db",
   options: {
     encrypt: true,
     enableArithAbort: true,
