@@ -5,7 +5,9 @@ class Event {
   static async getEvents() {
     try {
       const pool = await poolPromise;
-      const result = await pool.request().query("SELECT * FROM Events");
+      const result = await pool
+        .request()
+        .query("SELECT event_id, event_title, description FROM Events");
       return result.recordset;
     } catch (error) {
       console.error("Error retrieving events:", error.message);
@@ -22,7 +24,7 @@ class Event {
         .input("title", sql.NVarChar, title)
         .input("description", sql.NVarChar, description)
         .query(
-          "INSERT INTO Events (title, description) VALUES (@title, @description); SELECT SCOPE_IDENTITY() AS id"
+          "INSERT INTO Events (event_title, description) VALUES (@title, @description); SELECT SCOPE_IDENTITY() AS id"
         );
       return result.recordset[0].id;
     } catch (error) {
