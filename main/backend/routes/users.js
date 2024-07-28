@@ -173,7 +173,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Update user
-router.put("/put/:id",auth, async (req, res) => {
+router.put("/put/:id", auth, async (req, res) => {
   console.log(`PUT request received for user ID: ${req.params.id}`);
   console.log("Request Body:", req.body);
   const { id } = req.params;
@@ -214,7 +214,7 @@ router.put("/put/:id",auth, async (req, res) => {
 });
 
 // Get user by ID for profile
-router.get("/profile/:userId",auth, async (req, res) => {
+router.get("/profile/:userId", auth, async (req, res) => {
   const { userId } = req.params;
 
   try {
@@ -237,7 +237,7 @@ router.get("/profile/:userId",auth, async (req, res) => {
   }
 });
 
-router.delete("/:id",auth, async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -274,7 +274,7 @@ router.put("/role/:id", async (req, res) => {
   }
 });
 
-router.put("/profile/:userId",auth, async (req, res) => {
+router.put("/profile/:userId", auth, async (req, res) => {
   const { userId } = req.params;
   const { aboutMyself, preferredEvent } = req.body;
 
@@ -321,5 +321,53 @@ router.get("/protected-route", auth, (req, res) => {
   res.send("This is a protected route");
 });
 
+router.get("/admin-details/:userId", async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().input("userId", sql.Int, userId).query(`
+        SELECT u.username, u.email, ad.age, ad.about, ad.yearsOfExperience 
+        FROM Users u
+        LEFT JOIN AdminDetails ad ON u.id = ad.userId
+        WHERE u.id = @userId
+      `);
+
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ msg: "Admin details not found" });
+    }
+
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+// Update admin details
+router.put("/admin-details/:userId", async (req, res) => {
+  const { userId } = req.params;
+  const { age, about, yearsOfExperience } = req.body;
+
+  try {
+    const pool = await poolPromise;
+    const request = pool.request();
+
+    await request
+      .input("userId", sql.Int, userId)
+      .input("age", sql.Int, age)
+      .input("about", sql.NVarChar(sql.MAX), about)
+      .input("yearsOfExperience", sql.Int, yearsOfExperience).query(`
+        UPDATE AdminDetails 
+        SET age = @age, about = @about, yearsOfExperience = @yearsOfExperience
+        WHERE userId = @userId
+      `);
+
+    res.status(200).json({ msg: "Admin details updated successfully" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
 // Export the router
 module.exports = router;

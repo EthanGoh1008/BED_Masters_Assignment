@@ -1,10 +1,10 @@
 const sql = require("mssql");
 
 const config = {
-  user: "recipes_user",
-  password: "foodisgood",
+  user: "booksapi_user",
+  password: "123",
   server: "localhost",
-  database: "bed_masters_db",
+  database: "user_management_db",
   options: {
     encrypt: true,
     enableArithAbort: true,

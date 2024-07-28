@@ -15,9 +15,9 @@
           <a href="..\admin-create-user\admin-create.html">Manage Users</a>
         </li>
         <li>Content</li>
-        <li>Event</li>
+        <li><a href="..\admin-manage-event\addevent.html">Event</a></li>
         <li>Challenges</li>
-        <li>Forum</li>
+        <li><a href="..\admin-manage-forum\manageforum.html">Forum</a></li>
         <li class="logout"><a href="..\login\loggingopt.html">Log out</a></li>
       </ul>
     </div>
@@ -46,8 +46,36 @@
           <div>
             <h3 id="username-display">Username</h3>
             <p>Admin of the website</p>
+            <p id="age">Age:</p>
+            <p id="about">About:</p>
+            <p id="years-of-experience">Years of Experience:</p>
           </div>
+          <button id="edit-button">Edit</button>
         </div>
+      </div>
+    </div>
+    <!-- Modal Form for Editing Admin Details -->
+    <div id="edit-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Edit Admin Details</h2>
+        <form id="edit-admin-form">
+          <label for="edit-age">Age:</label>
+          <input type="number" id="edit-age" name="age" required />
+
+          <label for="edit-about">About:</label>
+          <textarea id="edit-about" name="about" required></textarea>
+
+          <label for="edit-experience">Years of Experience:</label>
+          <input
+            type="number"
+            id="edit-experience"
+            name="yearsOfExperience"
+            required
+          />
+
+          <button type="submit">Save Changes</button>
+        </form>
       </div>
     </div>
     <script src="script.js"></script>
