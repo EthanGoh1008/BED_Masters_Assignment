@@ -253,17 +253,30 @@ router.get("/profile/:userId", auth, async (req, res) => {
   }
 });
 
-router.delete("/:id", auth, async (req, res) => {
+// Delete user route
+router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
     const pool = await poolPromise;
+
+    // Delete related records in AdminDetails
     await pool
+      .request()
+      .input("userId", sql.Int, id)
+      .query("DELETE FROM AdminDetails WHERE userId = @userId");
+
+    // Delete the user
+    const result = await pool
       .request()
       .input("id", sql.Int, id)
       .query("DELETE FROM Users WHERE id = @id");
 
-    res.status(200).json({ msg: "User deleted successfully" });
+    if (result.rowsAffected[0] > 0) {
+      res.status(200).json({ msg: "User deleted successfully" });
+    } else {
+      res.status(404).json({ msg: "User not found" });
+    }
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
