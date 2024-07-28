@@ -15,9 +15,9 @@
           <a href="..\admin-create-user\admin-create.html">Manage Users</a>
         </li>
         <li><a href="#">Content</a></li>
-        <li><a href="#">Event</a></li>
+        <li><a href="manageevents.html">Event</a></li>
         <li><a href="#">Challenges</a></li>
-        <li><a href="#">Forum</a></li>
+        <li><a href="..\admin-manage-forum\manageforum.html">Forum</a></li>
         <li class="logout"><a href="#">Log out</a></li>
       </ul>
     </div>
@@ -35,15 +35,6 @@
       <div class="edit-event">
         <h2>Edit Event</h2>
         <form id="edit-event-form" enctype="multipart/form-data">
-          <div class="form-group">
-            <label for="event-image">Upload Image</label>
-            <div class="file-upload">
-                <input type="file" id="event-image" name="event-image" />
-                <label for="event-image" class="file-label">Choose File</label>
-            </div>
-            <div class="form-group">
-                <img id="event-image-preview" src="event_image_url" alt="Event Image" />
-            </div>
         </div>
         
           </div>
@@ -91,6 +82,6 @@
         </form>
       </div>
     </div>
-    <script src="admin-create-script.js"></script>
+    <script src="edit_event.js"></script>
   </body>
 </html>
