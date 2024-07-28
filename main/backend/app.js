@@ -21,6 +21,8 @@ const sql = require("mssql");
 const dbConfig = require("./dbConfig");
 const validateRecipe = require("./middlewares/validateRecipe");
 
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -33,6 +35,7 @@ app.get("/recipes/:id", recipesController.getRecipeById);
 app.post("/recipes", validateRecipe, recipesController.createRecipe);
 app.put("/recipes/:id", validateRecipe, recipesController.updateRecipe);
 app.delete("/recipes/:id", recipesController.deleteRecipe);
+
 
 //Liew Zhan Yang routes
 app.use("/api/users", usersRoute);

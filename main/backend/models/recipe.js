@@ -9,18 +9,14 @@ class Recipe {
   }
 
   static async getAllRecipes() {
-    const connection = await sql.connect(dbConfig);
-
-    const sqlQuery = "SELECT * FROM FoodRecipes";
-
-    const request = connection.request();
-    const result = await request.query(sqlQuery);
-
-    connection.close();
-
-    return result.recordset.map(
-      (row) => new Recipe(row.id, row.title, row.image_url)
-    ); // Convert rows to Recipe objects
+    try {
+      const pool = await poolPromise;
+      const result = await pool.request().query("SELECT * FROM Recipes");
+      return result.recordset;
+    } catch (error) {
+      console.error("Error retrieving recipes:", error.message);
+      throw error;
+    }
   }
 
   static async getRecipesById(id) {
