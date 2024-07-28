@@ -8,7 +8,8 @@ const router = express.Router();
 
 // Register a new user
 router.post("/register", async (req, res) => {
-  const { username, email, password, role } = req.body;
+  const { username, email, password, role, age, about, yearsOfExperience } =
+    req.body;
 
   if (!username || !email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
@@ -28,15 +29,30 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
-    await pool
+    const insertUserResult = await pool
       .request()
       .input("username", sql.VarChar, username)
       .input("email", sql.VarChar, email)
       .input("password", sql.VarChar, hash)
       .input("role", sql.VarChar, role || "member")
       .query(
-        "INSERT INTO Users (username, email, password, role) VALUES (@username, @email, @password, @role)"
+        "INSERT INTO Users (username, email, password, role) OUTPUT INSERTED.id VALUES (@username, @email, @password, @role)"
       );
+
+    const userId = insertUserResult.recordset[0].id;
+
+    // Insert into AdminDetails if the role is admin
+    if (role === "admin") {
+      await pool
+        .request()
+        .input("userId", sql.Int, userId)
+        .input("age", sql.Int, age || null)
+        .input("about", sql.NVarChar(sql.MAX), about || null)
+        .input("yearsOfExperience", sql.Int, yearsOfExperience || null)
+        .query(
+          "INSERT INTO AdminDetails (userId, age, about, yearsOfExperience) VALUES (@userId, @age, @about, @yearsOfExperience)"
+        );
+    }
 
     res.status(201).json({ msg: "User registered successfully" });
   } catch (err) {
@@ -351,15 +367,16 @@ router.put("/admin-details/:userId", async (req, res) => {
 
   try {
     const pool = await poolPromise;
-    const request = pool.request();
 
-    await request
+    // Update the AdminDetails table
+    await pool
+      .request()
       .input("userId", sql.Int, userId)
       .input("age", sql.Int, age)
       .input("about", sql.NVarChar(sql.MAX), about)
       .input("yearsOfExperience", sql.Int, yearsOfExperience).query(`
         UPDATE AdminDetails 
-        SET age = @age, about = @about, yearsOfExperience = @yearsOfExperience
+        SET age = @age, about = @about, yearsOfExperience = @yearsOfExperience 
         WHERE userId = @userId
       `);
 
