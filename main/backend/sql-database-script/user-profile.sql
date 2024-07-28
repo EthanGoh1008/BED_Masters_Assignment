@@ -34,3 +34,20 @@ VALUES
 (3, 'About Liewzhanyang', 'Event 3'),
 (4, 'About Alice', 'Event 4'),
 (5, 'About Bob', 'Event 5');
+
+
+CREATE TABLE AdminDetails (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    userId INT FOREIGN KEY REFERENCES Users(id),
+    age INT,
+    about NVARCHAR(MAX),
+    yearsOfExperience INT
+);
+
+INSERT INTO AdminDetails (userId, age, about, yearsOfExperience)
+VALUES 
+(2013, 30, 'Dedicated admin with a passion for user engagement and content creation.', 7);
+
+Select * FROM AdminDetails
+SELECT * FROM Users
+SELECT* FROM UserProfile
