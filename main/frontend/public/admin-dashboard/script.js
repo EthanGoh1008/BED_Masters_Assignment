@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchCounts();
   displayUsername();
   displayAdminAdditionalDetails();
+  fetchEventCount();
+  fetchForumCount();
 
   document.querySelector(".logout").addEventListener("click", function () {
     alert("Logging out...");
@@ -52,6 +54,38 @@ async function fetchCounts() {
       "Error loading total members";
     document.getElementById("total-admins").textContent =
       "Error loading total admins";
+  }
+}
+
+async function fetchEventCount() {
+  try {
+    const eventsResponse = await fetch(
+      "http://localhost:3000/api/admin/count-events"
+    );
+    const eventsData = await eventsResponse.json();
+    document.getElementById(
+      "total-events"
+    ).textContent = `${eventsData.totalEvents} Total Events`;
+  } catch (error) {
+    console.error("Error fetching event count:", error);
+    document.getElementById("total-events").textContent =
+      "Error loading total events";
+  }
+}
+
+async function fetchForumCount() {
+  try {
+    const forumResponse = await fetch(
+      "http://localhost:3000/api/admin/count-forum"
+    );
+    const forumData = await forumResponse.json();
+    document.getElementById(
+      "total-forum"
+    ).textContent = `${forumData.totalForum} Total Forum Posts`;
+  } catch (error) {
+    console.error("Error fetching forum count:", error);
+    document.getElementById("total-forum").textContent =
+      "Error loading total forum posts";
   }
 }
 
