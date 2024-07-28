@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Challenge</title>
+    <link rel="stylesheet" href="add_event.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>HL SEA Admin</h2>
+      <ul>
+        <li><a href="..\admin-dashboard\index.html">Dashboard</a></li>
+        <li>
+          <a href="..\admin-create-user\admin-create.html">Manage Users</a>
+        </li>
+        <li>Content</li>
+        <li>Event</li>
+        <li>Challenges</li>
+        <li>Forum</li>
+        <li class="logout"><a href="..\login\loggingopt.html">Log out</a></li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <div class="header">
+        <div class="welcome">
+          <h1>Add Challenges</h1>
+        </div>
+      </div>
+      <div class="add-event">
+        <h2>Challenge Details</h2>
+        <form id="add-event-form">
+          <div class="form-group">
+            <label for="name">Challenge Name</label>
+            <input
+              type="text"
+              id="challengename"
+              name="challengename"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="description">Challenge Description</label>
+            <input
+              type="text"
+              id="challengedesc"
+              name="challengedesc"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="type">Type</label>
+            <select id="type" name="type" required>
+              <option value="current">Current</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <button type="submit">Create</button>
+        </form>
+      </div>
+    </div>
+    <script src="add_event.js"></script>
+  </body>
+</html>

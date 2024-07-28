@@ -1,3 +1,5 @@
+/* Existing CSS */
+
 body {
   display: flex;
   margin: 0;
@@ -68,66 +70,43 @@ body {
   height: 30px;
 }
 
-.manage-events {
+.add-event {
   background: white;
   padding: 20px;
   border-radius: 5px;
   margin-top: 20px;
 }
 
-.manage-events h2 {
+.add-user h2 {
   margin-bottom: 20px;
 }
 
-.events-list {
-  position: relative;
+.form-group {
+  margin-bottom: 15px;
 }
 
-.events-list h3 {
-  display: inline-block;
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
 }
 
-.add-event {
-  position: absolute;
-  right: 0;
-  top: 0;
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button[type="submit"] {
   background: #00c0ef;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 50%;
-  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-th,
-td {
-  text-align: left;
-  padding: 8px;
-}
-
-th {
-  background: #eee;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.edit,
-.delete {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
+button[type="submit"]:hover {
+  background: #008bb9;
 }
