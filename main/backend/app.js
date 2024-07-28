@@ -7,6 +7,7 @@ const adminRoutes = require("./routes/admin");
 const forumController = require("./controllers/forumController");
 const validateForum = require("./middlewares/validateForum");
 const eventsRoute = require("./routes/event");
+const eventRoutes = require("./routes/eventRoute");
 const forumRoutes = require("./routes/forumroute");
 const { poolPromise } = require("./dbConfig");
 const app = express();
@@ -34,6 +35,7 @@ app.post("/api/forum", validateForum, forumController.createForum);
 app.put("/api/forum/:id", validateForum, forumController.updateForum);
 app.delete("/api/forum/:id", forumController.deleteForum);
 app.use("/api", eventsRoute);
+app.use("/api/events", eventRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the User Management and Forum API");
@@ -56,7 +58,6 @@ startServer();
 
 process.on("SIGINT", async () => {
   console.log("Server is gracefully shutting down");
-  await poolPromise.close();
   console.log("Database connection closed");
   process.exit(0);
 });

@@ -10,15 +10,15 @@
     <div class="sidebar">
       <h2>HL SEA Admin</h2>
       <ul>
-        <li><a href="..\admin-dashboard\index.html">Dashboard</a></li>
+        <li><a href="../admin-dashboard/index.html">Dashboard</a></li>
         <li>
-          <a href="..\admin-create-user\admin-create.html">Manage Users</a>
+          <a href="../admin-create-user/admin-create.html">Manage Users</a>
         </li>
         <li><a href="#">Content</a></li>
-        <li><a href="#">Event</a></li>
+        <li><a href="manageevents.html">Event</a></li>
         <li><a href="#">Challenges</a></li>
-        <li><a href="#">Forum</a></li>
-        <li class="logout"><a href="#">Log out</a></li>
+        <li><a href="../admin-manage-forum/manageforum.html">Forum</a></li>
+        <li class="logout"><a href="..\login\loggingopt.html">Log out</a></li>
       </ul>
     </div>
     <div class="main-content">
@@ -27,37 +27,24 @@
           <h1>Add Event</h1>
         </div>
         <div class="user-info">
-          <img src="notification.png" alt="Notifications" />
           <span>Alexia</span>
-          <img src="user-icon.png" alt="User Icon" />
         </div>
       </div>
       <div class="edit-event">
         <h2>Add Event</h2>
-        <form id="edit-event-form" enctype="multipart/form-data">
-          <div class="form-group">
-            <label for="event-image">Upload Image</label>
-            <input type="file" id="event-image" name="event-image" />
-          </div>
-          <div class="form-group">
-            <img
-              id="event-image-preview"
-              src="event_image_url"
-              alt="Event Image"
-            />
-          </div>
+        <form id="edit-event-form">
           <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" id="title" name="title" />
+            <input type="text" id="title" name="title" required />
           </div>
           <div class="form-group">
             <label for="description">Description</label>
-            <textarea id="description" name="description"></textarea>
+            <textarea id="description" name="description" required></textarea>
           </div>
           <button type="submit">Add</button>
         </form>
       </div>
     </div>
-    <script src="admin-create-script.js"></script>
+    <script src="add_event.js"></script>
   </body>
 </html>
