@@ -1,37 +1,68 @@
-const sql = require("mssql");
 const { poolPromise } = require("../dbConfig");
+const sql = require("mssql");
 
-class Event {
-  static async getEvents() {
+class Forum {
+  static async getForums() {
     try {
       const pool = await poolPromise;
-      const result = await pool
-        .request()
-        .query("SELECT event_id, event_title, description FROM Events");
+      const result = await pool.request().query("SELECT * FROM Forums");
       return result.recordset;
     } catch (error) {
-      console.error("Error retrieving events:", error.message);
+      console.error("Error getting forums:", error);
       throw error;
     }
   }
 
-  static async createEvent(newEventData) {
+  static async createForum({ title, description, image_url }) {
     try {
-      const { title, description } = newEventData;
       const pool = await poolPromise;
       const result = await pool
         .request()
         .input("title", sql.NVarChar, title)
         .input("description", sql.NVarChar, description)
+        .input("image_url", sql.NVarChar, image_url)
         .query(
-          "INSERT INTO Events (event_title, description) VALUES (@title, @description); SELECT SCOPE_IDENTITY() AS id"
+          "INSERT INTO Forums (title, description, image_url) OUTPUT INSERTED.id VALUES (@title, @description, @image_url)"
         );
       return result.recordset[0].id;
     } catch (error) {
-      console.error("Error creating event:", error.message);
+      console.error("Error creating forum:", error);
+      throw error;
+    }
+  }
+
+  static async updateForum(forumId, { title, description, image_url }) {
+    try {
+      const pool = await poolPromise;
+      const result = await pool
+        .request()
+        .input("id", sql.Int, forumId)
+        .input("title", sql.NVarChar, title)
+        .input("description", sql.NVarChar, description)
+        .input("image_url", sql.NVarChar, image_url)
+        .query(
+          "UPDATE Forums SET title = @title, description = @description, image_url = @image_url WHERE id = @id"
+        );
+      return result.rowsAffected[0] > 0;
+    } catch (error) {
+      console.error("Error updating forum:", error);
+      throw error;
+    }
+  }
+
+  static async deleteForum(forumId) {
+    try {
+      const pool = await poolPromise;
+      const result = await pool
+        .request()
+        .input("id", sql.Int, forumId)
+        .query("DELETE FROM Forums WHERE id = @id");
+      return result.rowsAffected[0] > 0;
+    } catch (error) {
+      console.error("Error deleting forum:", error);
       throw error;
     }
   }
 }
 
-module.exports = Event;
+module.exports = Forum;
