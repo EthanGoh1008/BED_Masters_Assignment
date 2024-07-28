@@ -5,22 +5,21 @@ const getAllRecipes = async (req, res) => {
     const recipes = await Recipe.getAllRecipes();
     res.json(recipes);
   } catch (error) {
-    console.error(error);
+    console.error("Error retrieving all recipes:", error);
     res.status(500).send("Error retrieving recipes");
   }
 };
 
 const getRecipeById = async (req, res) => {
-  // Corrected function name
   const recipeId = parseInt(req.params.id);
   try {
-    const recipe = await Recipe.getRecipesById(recipeId); // Corrected method name
+    const recipe = await Recipe.getRecipeById(recipeId); // Corrected method name
     if (!recipe) {
       return res.status(404).send("Recipe not found");
     }
     res.json(recipe);
   } catch (error) {
-    console.error(error);
+    console.error(`Error retrieving recipe with ID ${recipeId}:`, error);
     res.status(500).send("Error retrieving recipe");
   }
 };
@@ -31,7 +30,7 @@ const createRecipe = async (req, res) => {
     const createdRecipe = await Recipe.createRecipe(newRecipe);
     res.status(201).json(createdRecipe);
   } catch (error) {
-    console.error(error);
+    console.error("Error creating recipe:", error);
     res.status(500).send("Error creating recipe");
   }
 };
@@ -47,7 +46,7 @@ const updateRecipe = async (req, res) => {
     }
     res.json(updatedRecipe);
   } catch (error) {
-    console.error(error);
+    console.error(`Error updating recipe with ID ${recipeId}:`, error);
     res.status(500).send("Error updating recipe");
   }
 };
@@ -62,14 +61,14 @@ const deleteRecipe = async (req, res) => {
     }
     res.status(204).send();
   } catch (error) {
-    console.error(error);
+    console.error(`Error deleting recipe with ID ${recipeId}:`, error);
     res.status(500).send("Error deleting recipe");
   }
 };
 
 module.exports = {
   getAllRecipes,
-  getRecipeById, // Corrected export name
+  getRecipeById,
   createRecipe,
   updateRecipe,
   deleteRecipe,
