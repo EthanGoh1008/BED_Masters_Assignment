@@ -1,163 +1,96 @@
-/* Banner styles */
-.banner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #e2f3f5;
-  padding: 20px;
-  margin: 20px 0;
+.content {
+  padding: 32px;
 }
 
-.banner-text h1 {
-  font-size: 2rem;
-  color: #333;
+.header {
+  margin-bottom: 32px;
 }
 
-.banner .buttons {
-  display: flex;
-  gap: 10px;
+.header h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
 }
 
-.banner .buttons .btn {
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background 0.3s;
+.header p {
+  font-size: 18px;
+  margin-bottom: 24px;
 }
 
-.banner .buttons .btn.start-course {
+.events-section {
+  margin-top: 32px;
+}
+
+.events-section h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.events-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.event-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.event-card:hover {
+  transform: translateY(-10px);
+}
+
+.event-header {
+  padding: 16px;
   background-color: #007bff;
-  color: #fff;
+  color: white;
 }
 
-.banner .buttons .btn.start-course:hover {
-  background-color: #0056b3;
+.event-header h4 {
+  margin: 0;
+  font-size: 18px;
 }
 
-.banner .buttons .btn.learn-more {
-  background-color: #6c757d;
-  color: #fff;
+.event-header p {
+  margin: 0;
+  font-size: 14px;
 }
 
-.banner .buttons .btn.learn-more:hover {
-  background-color: #5a6268;
+.event-body {
+  padding: 16px;
 }
 
-.banner img {
-  max-width: 100%;
+.event-body img {
+  width: 100%;
   height: auto;
+  border-radius: 4px;
+  margin-bottom: 16px;
 }
 
-/* Categories styles */
-.categories {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px 0;
+.event-body p {
+  font-size: 14px;
+  color: #555;
 }
 
-.categories .category {
+.event-footer {
+  padding: 16px;
   text-align: center;
 }
 
-.categories .category img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.categories .category p {
-  margin-top: 10px;
-  font-size: 1.1rem;
-}
-
-/* Upcoming Events styles */
-[alt="Calendar of upcoming events"] {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-[alt="Page title 'Upcoming Events'"] {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-
-[alt="Page description"] {
-  font-size: 1rem;
-  color: #666;
-}
-
-[alt="Dropdowns for filtering events"] {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-[alt="Category filter dropdown"],
-[alt="Date filter dropdown"] {
-  cursor: pointer;
-  padding: 8px 16px;
-  font-size: 1rem;
-  color: #333;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f8f9fa;
-}
-
-[alt="Featured events section title"] {
-  font-size: 1.25rem;
-  margin-bottom: 10px;
-}
-
-[alt="Featured events in a 3-column grid layout"] {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-[alt="Event details preview"] {
-  font-size: 0.9rem;
-  color: #666;
-  margin-top: 10px;
-}
-
-[alt="Featured events in a 3-column grid layout"] > div {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: #fff;
-}
-
-[alt="Featured events in a 3-column grid layout"] img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-[alt="Featured events in a 3-column grid layout"] button {
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
+.like-button {
   background-color: #007bff;
-  color: #fff;
+  color: white;
   border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
   cursor: pointer;
-  transition: background 0.3s;
 }
 
-[alt="Featured events in a 3-column grid layout"] button:hover {
+.like-button:hover {
   background-color: #0056b3;
-}
-
-/* Custom variables for colors */
-:root {
-  --background: #f4f4f4;
-  --foreground: #333;
-  --foreground-500: #666;
-  --foreground-600: #444;
-  --border: #ccc;
-  --button-background: #007bff;
-  --button-text: #fff;
 }

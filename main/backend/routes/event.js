@@ -2,8 +2,7 @@ const express = require("express");
 const { poolPromise } = require("../dbConfig");
 const router = express.Router();
 
-
-router.get("/event", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const pool = await poolPromise;
     console.log("Connected to the database");
