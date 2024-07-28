@@ -14,11 +14,15 @@ const port = process.env.PORT || 3000;
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger-output.json"); // Import generated spec
 const { auth } = require("./middlewares/authMiddleware");
+const recipeRoutes = require("./routes/recipe");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+//Ethan routes
+app.use("/recipes", recipeRoutes);
 
 //Liew Zhan Yang routes
 app.use("/api/users", usersRoute);
