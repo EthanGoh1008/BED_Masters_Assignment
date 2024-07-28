@@ -10,42 +10,64 @@
     <div class="sidebar">
       <h2>HL SEA Admin</h2>
       <ul>
-        <li><a href="..\admin-dashboard\index.html">Dashboard</a></li>
         <li>
-          <a href="..\admin-create-user\admin-create.html">Manage Users</a>
+          <a href="..\admin-dashboard\index.html"
+            ><i class="fas fa-tachometer-alt"></i> Dashboard</a
+          >
         </li>
-        <li>Content</li>
-        <li>Event</li>
-        <li>Challenges</li>
-        <li>Forum</li>
-        <li class="logout"><a href="..\login\loggingopt.html">Log out</a></li>
+        <li>
+          <a href="..\admin-create-user\admin-create.html"
+            ><i class="fas fa-users"></i> Manage Users</a
+          >
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-file-alt"></i> Content</a>
+        </li>
+        <li>
+          <a href="..\admin-manage-event\addevent.html"
+            ><i class="fas fa-calendar-alt"></i> Event</a
+          >
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-trophy"></i> Challenges</a>
+        </li>
+        <li>
+          <a href="..\admin-manage-forum\manageforum.html"
+            ><i class="fas fa-comments"></i> Forum</a
+          >
+        </li>
+        <li class="logout">
+          <a href="..\login\loggingopt.html"
+            ><i class="fas fa-sign-out-alt"></i> Log out</a
+          >
+        </li>
       </ul>
     </div>
     <div class="main-content">
       <div class="header">
         <div class="welcome">
-          <h1>Manage Events</h1>
+          <h1>Manage Challenges</h1>
         </div>
       </div>
       <div class="manage-events">
         <div class="events-list">
-          <h3>Events List</h3>
-          <a href="add_user.html" class="add-user">+</a>
+          <h3>Challenge List</h3>
+          <a href="add_event.html" class="add-event">+</a>
           <table>
             <thead>
               <tr>
-                <th>Type</th>
                 <th>Name</th>
                 <th>Desc</th>
+                <th>Type</th>
               </tr>
             </thead>
-            <tbody id="user-table-body">
-              <!-- User rows will be dynamically inserted here -->
+            <tbody id="challenge-table-body">
+              <!-- Challenge rows will be dynamically inserted here -->
             </tbody>
           </table>
         </div>
       </div>
     </div>
-    <script src=""></script>
+    <script src="adminevent.js"></script>
   </body>
 </html>

@@ -5,8 +5,8 @@ body {
 }
 
 .sidebar {
-  width: 200px;
-  background: #444;
+  width: 250px; /* Adjusted for better space */
+  background: #2c3e50; /* Changed to a more modern color */
   color: white;
   padding: 20px;
   height: 100vh;
@@ -14,7 +14,10 @@ body {
 
 .sidebar h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* Increased margin for better spacing */
+  font-size: 24px;
+  font-weight: 700;
+  color: #ecf0f1; /* Slightly lighter color for better contrast */
 }
 
 .sidebar ul {
@@ -23,28 +26,40 @@ body {
 }
 
 .sidebar ul li {
-  padding: 10px;
-  cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .sidebar ul li a {
   color: white;
   text-decoration: none;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 4px; /* Rounded corners for a modern look */
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-.sidebar ul li:hover,
-.sidebar ul .logout {
-  background: #666;
+.sidebar ul li a:hover {
+  background: #34495e;
+  color: #1abc9c; /* Slight color change on hover */
 }
 
-.sidebar ul .logout {
-  color: red;
-  margin-top: 20px;
+.sidebar ul li a i {
+  margin-right: 10px; /* Space between icon and text */
+}
+
+.sidebar ul .logout a {
+  color: #e74c3c; /* Red color for logout */
+}
+
+.sidebar ul .logout a:hover {
+  background: #c0392b; /* Darker red on hover */
 }
 
 .main-content {
   flex-grow: 1;
-  background: #f0f0f0;
+  background: #ecf0f1;
   padding: 20px;
 }
 

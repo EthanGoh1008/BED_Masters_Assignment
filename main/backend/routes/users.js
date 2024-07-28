@@ -8,7 +8,8 @@ const router = express.Router();
 
 // Register a new user
 router.post("/register", async (req, res) => {
-  const { username, email, password, role } = req.body;
+  const { username, email, password, role, age, about, yearsOfExperience } =
+    req.body;
 
   if (!username || !email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
@@ -28,15 +29,30 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
-    await pool
+    const insertUserResult = await pool
       .request()
       .input("username", sql.VarChar, username)
       .input("email", sql.VarChar, email)
       .input("password", sql.VarChar, hash)
       .input("role", sql.VarChar, role || "member")
       .query(
-        "INSERT INTO Users (username, email, password, role) VALUES (@username, @email, @password, @role)"
+        "INSERT INTO Users (username, email, password, role) OUTPUT INSERTED.id VALUES (@username, @email, @password, @role)"
       );
+
+    const userId = insertUserResult.recordset[0].id;
+
+    // Insert into AdminDetails if the role is admin
+    if (role === "admin") {
+      await pool
+        .request()
+        .input("userId", sql.Int, userId)
+        .input("age", sql.Int, age || null)
+        .input("about", sql.NVarChar(sql.MAX), about || null)
+        .input("yearsOfExperience", sql.Int, yearsOfExperience || null)
+        .query(
+          "INSERT INTO AdminDetails (userId, age, about, yearsOfExperience) VALUES (@userId, @age, @about, @yearsOfExperience)"
+        );
+    }
 
     res.status(201).json({ msg: "User registered successfully" });
   } catch (err) {
@@ -173,7 +189,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Update user
-router.put("/put/:id",auth, async (req, res) => {
+router.put("/put/:id", auth, async (req, res) => {
   console.log(`PUT request received for user ID: ${req.params.id}`);
   console.log("Request Body:", req.body);
   const { id } = req.params;
@@ -214,7 +230,7 @@ router.put("/put/:id",auth, async (req, res) => {
 });
 
 // Get user by ID for profile
-router.get("/profile/:userId",auth, async (req, res) => {
+router.get("/profile/:userId", auth, async (req, res) => {
   const { userId } = req.params;
 
   try {
@@ -237,17 +253,30 @@ router.get("/profile/:userId",auth, async (req, res) => {
   }
 });
 
-router.delete("/:id",auth, async (req, res) => {
+// Delete user route
+router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
     const pool = await poolPromise;
+
+    // Delete related records in AdminDetails
     await pool
+      .request()
+      .input("userId", sql.Int, id)
+      .query("DELETE FROM AdminDetails WHERE userId = @userId");
+
+    // Delete the user
+    const result = await pool
       .request()
       .input("id", sql.Int, id)
       .query("DELETE FROM Users WHERE id = @id");
 
-    res.status(200).json({ msg: "User deleted successfully" });
+    if (result.rowsAffected[0] > 0) {
+      res.status(200).json({ msg: "User deleted successfully" });
+    } else {
+      res.status(404).json({ msg: "User not found" });
+    }
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
@@ -274,7 +303,7 @@ router.put("/role/:id", async (req, res) => {
   }
 });
 
-router.put("/profile/:userId",auth, async (req, res) => {
+router.put("/profile/:userId", auth, async (req, res) => {
   const { userId } = req.params;
   const { aboutMyself, preferredEvent } = req.body;
 
@@ -321,5 +350,54 @@ router.get("/protected-route", auth, (req, res) => {
   res.send("This is a protected route");
 });
 
+router.get("/admin-details/:userId", async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().input("userId", sql.Int, userId).query(`
+        SELECT u.username, u.email, ad.age, ad.about, ad.yearsOfExperience 
+        FROM Users u
+        LEFT JOIN AdminDetails ad ON u.id = ad.userId
+        WHERE u.id = @userId
+      `);
+
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ msg: "Admin details not found" });
+    }
+
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+// Update admin details
+router.put("/admin-details/:userId", async (req, res) => {
+  const { userId } = req.params;
+  const { age, about, yearsOfExperience } = req.body;
+
+  try {
+    const pool = await poolPromise;
+
+    // Update the AdminDetails table
+    await pool
+      .request()
+      .input("userId", sql.Int, userId)
+      .input("age", sql.Int, age)
+      .input("about", sql.NVarChar(sql.MAX), about)
+      .input("yearsOfExperience", sql.Int, yearsOfExperience).query(`
+        UPDATE AdminDetails 
+        SET age = @age, about = @about, yearsOfExperience = @yearsOfExperience 
+        WHERE userId = @userId
+      `);
+
+    res.status(200).json({ msg: "Admin details updated successfully" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
 // Export the router
 module.exports = router;

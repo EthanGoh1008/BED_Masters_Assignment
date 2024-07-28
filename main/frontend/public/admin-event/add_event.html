@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Forum</title>
-    <link rel="stylesheet" href="editforum.css" />
+    <title>Add Challenge</title>
+    <link rel="stylesheet" href="add_event.css" />
   </head>
   <body>
     <div class="sidebar">
@@ -46,40 +46,41 @@
     <div class="main-content">
       <div class="header">
         <div class="welcome">
-          <h1>Edit Forum</h1>
-        </div>
-        <div class="user-info">
-          <img src="notification.png" alt="Notifications" />
-          <span>Alexia</span>
-          <img src="user-icon.png" alt="User Icon" />
+          <h1>Add Challenges</h1>
         </div>
       </div>
-      <div class="edit-event">
-        <h2>Edit Forum</h2>
-        <form id="edit-event-form" enctype="multipart/form-data">
+      <div class="add-event">
+        <h2>Challenge Details</h2>
+        <form id="add-event-form">
           <div class="form-group">
-            <label for="event-image">Upload Image</label>
-            <input type="file" id="event-image" name="event-image" />
-          </div>
-          <div class="form-group">
-            <img
-              id="event-image-preview"
-              src="event_image_url"
-              alt="Event Image"
+            <label for="name">Challenge Name</label>
+            <input
+              type="text"
+              id="challengename"
+              name="challengename"
+              required
             />
           </div>
           <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title" />
+            <label for="description">Challenge Description</label>
+            <input
+              type="text"
+              id="challengedesc"
+              name="challengedesc"
+              required
+            />
           </div>
           <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" name="description"></textarea>
+            <label for="type">Type</label>
+            <select id="type" name="type" required>
+              <option value="current">Current</option>
+              <option value="other">Other</option>
+            </select>
           </div>
-          <button type="submit">Edit</button>
+          <button type="submit">Create</button>
         </form>
       </div>
     </div>
-    <script src="admin-create-script.js"></script>
+    <script src="add_event.js"></script>
   </body>
 </html>

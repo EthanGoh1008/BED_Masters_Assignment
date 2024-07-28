@@ -4,6 +4,76 @@
   }
 }
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa; /* Light gray background */
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+p,
+a {
+  font-family: "Poppins", sans-serif; /* Modern font for headings and text */
+}
+
+h1 {
+  color: #343a40; /* Darker color for the heading */
+}
+
+.lead span {
+  font-weight: bold;
+}
+
 .move-up {
-  margin-top: -15rem; /* Adjust this value to move the title higher or lower */
+  margin-top: -10rem; /* Adjust this value to move the title higher or lower */
+  transition: margin-top 0.3s ease-in-out;
+}
+
+.move-up:hover {
+  margin-top: -11rem; /* Slight move on hover */
+}
+
+.content-container {
+  padding: 3rem 2rem; /* Add padding for better spacing */
+}
+
+.btn-primary {
+  background-color: #007bff; /* Bootstrap primary color */
+  border-color: #007bff;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px); /* Slight lift effect on hover */
+}
+
+.btn-outline-secondary {
+  color: #6c757d; /* Bootstrap secondary color */
+  border-color: #6c757d;
+  transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+.btn-outline-secondary:hover {
+  color: #343a40;
+  border-color: #343a40;
+  transform: translateY(-3px); /* Slight lift effect on hover */
+}
+
+img.full-height {
+  object-fit: cover;
+  width: 100%;
+  height: 100vh;
+  border-radius: 0 0.3rem 0.3rem 0; /* Add slight border radius to the right */
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
 }

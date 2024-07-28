@@ -16,6 +16,12 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger-output.json"); // Import generated spec
 const { auth } = require("./middlewares/authMiddleware");
 const recipeRoutes = require("./routes/recipe");
+const recipesController = require("./controllers/recipesController");
+const sql = require("mssql");
+const dbConfig = require("./dbConfig");
+const validateRecipe = require("./middlewares/validateRecipe");
+
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,6 +30,12 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //Ethan routes
 app.use("/recipes", recipeRoutes);
+app.get("/recipes", recipesController.getAllRecipes);
+app.get("/recipes/:id", recipesController.getRecipeById);
+app.post("/recipes", validateRecipe, recipesController.createRecipe);
+app.put("/recipes/:id", validateRecipe, recipesController.updateRecipe);
+app.delete("/recipes/:id", recipesController.deleteRecipe);
+
 
 //Liew Zhan Yang routes
 app.use("/api/users", usersRoute);

@@ -43,4 +43,32 @@ router.get("/count-admins", async (req, res) => {
   }
 });
 
+// Get total events count
+router.get("/count-events", async (req, res) => {
+  try {
+    const pool = await poolPromise;
+    const result = await pool
+      .request()
+      .query("SELECT COUNT(*) AS totalEvents FROM Events");
+    res.json({ totalEvents: result.recordset[0].totalEvents });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+// Get total forum count
+router.get("/count-forum", async (req, res) => {
+  try {
+    const pool = await poolPromise;
+    const result = await pool
+      .request()
+      .query("SELECT COUNT(*) AS totalForum FROM Forums");
+    res.json({ totalForum: result.recordset[0].totalForum });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 module.exports = router;

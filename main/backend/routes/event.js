@@ -1,6 +1,7 @@
 const express = require("express");
-const { poolPromise, sql } = require("../dbConfig");
+const { poolPromise } = require("../dbConfig");
 const router = express.Router();
+
 
 router.get("/event", async (req, res) => {
   try {

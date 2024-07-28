@@ -10,15 +10,37 @@
     <div class="sidebar">
       <h2>HL SEA Admin</h2>
       <ul>
-        <li><a href="..\admin-dashboard\index.html">Dashboard</a></li>
         <li>
-          <a href="..\admin-create-user\admin-create.html">Manage Users</a>
+          <a href="..\admin-dashboard\index.html"
+            ><i class="fas fa-tachometer-alt"></i> Dashboard</a
+          >
         </li>
-        <li>Content</li>
-        <li>Event</li>
-        <li>Challenges</li>
-        <li>Forum</li>
-        <li class="logout"><a href="..\login\loggingopt.html">Log out</a></li>
+        <li>
+          <a href="..\admin-create-user\admin-create.html"
+            ><i class="fas fa-users"></i> Manage Users</a
+          >
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-file-alt"></i> Content</a>
+        </li>
+        <li>
+          <a href="..\admin-manage-event\addevent.html"
+            ><i class="fas fa-calendar-alt"></i> Event</a
+          >
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-trophy"></i> Challenges</a>
+        </li>
+        <li>
+          <a href="..\admin-manage-forum\manageforum.html"
+            ><i class="fas fa-comments"></i> Forum</a
+          >
+        </li>
+        <li class="logout">
+          <a href="..\login\loggingopt.html"
+            ><i class="fas fa-sign-out-alt"></i> Log out</a
+          >
+        </li>
       </ul>
     </div>
     <div class="main-content">
@@ -34,7 +56,7 @@
       <div class="dashboard">
         <div class="card" id="total-users">Loading...</div>
         <div class="card" id="total-events">Loading...</div>
-        <div class="card" id="total-participants">Loading...</div>
+        <div class="card" id="total-participants">1 Challenges</div>
         <div class="card" id="total-members">Loading...</div>
         <div class="card" id="total-forum">Loading...</div>
         <div class="card" id="total-admins">Loading...</div>
@@ -46,10 +68,17 @@
           <div>
             <h3 id="username-display">Username</h3>
             <p>Admin of the website</p>
+            <p id="age">Age:</p>
+            <p id="about">About:</p>
+            <p id="years-of-experience">Years of Experience:</p>
+            <a href="..\admin-edit-pages\edit-admin.html">
+              <button id="edit-button">Edit</button>
+            </a>
           </div>
         </div>
       </div>
     </div>
+
     <script src="script.js"></script>
   </body>
 </html>

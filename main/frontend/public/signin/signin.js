@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem("token", data.token);
             localStorage.setItem("userId", data.user.id); // Save userId to local storage
             alert("Login successful");
-            window.location.href = "../main-page/main-page.html"; // Redirect to main menu
+            window.location.href = "../main-page/index.html"; // Redirect to main menu
           } else {
             alert(data.msg || "Login failed");
           }
