@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Events</title>
+    <link rel="stylesheet" href="manageevent.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>HL SEA Admin</h2>
+      <ul>
+        <li><a href="..\admin-dashboard\index.html">Dashboard</a></li>
+        <li>
+          <a href="..\admin-create-user\admin-create.html">Manage Users</a>
+        </li>
+        <li><a href="#">Content</a></li>
+        <li><a href="#">Event</a></li>
+        <li><a href="#">Challenges</a></li>
+        <li><a href="#">Forum</a></li>
+        <li class="logout"><a href="#">Log out</a></li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <div class="header">
+        <div class="welcome">
+          <h1>Manage Events</h1>
+        </div>
+        <div class="user-info">
+          <img src="notification.png" alt="Notifications" />
+          <span>Alexia</span>
+          <img src="user-icon.png" alt="User Icon" />
+        </div>
+      </div>
+      <div class="manage-events">
+        <h2>Event List</h2>
+        <a href="add_event.html" class="add-event">+</a>
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Name</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="event-table-body">
+            <!-- Event rows will be dynamically inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="admin-create-script.js"></script>
+  </body>
+</html>

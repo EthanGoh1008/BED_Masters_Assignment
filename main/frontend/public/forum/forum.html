@@ -22,7 +22,7 @@
           >
         </li>
         <li><a href="..\forum\forum.html">Forum</a></li>
-        <li><a href="#">Upcoming Events</a></li>
+        <li><a href="..\events\events.html">Upcoming Events</a></li>
         <li><a href="#">Current Challenges</a></li>
       </ul>
       <a href="..\personal-inform-pages\personal-inform.html">
@@ -37,44 +37,28 @@
       <button class="add-forum">Add Forum +</button>
     </div>
 
-    <div class="forum-post">
-      <div class="post-header">
-        <span class="post-title">Running Marathon Association</span>
-        <div class="post-actions">
-          <button class="edit-post">✎</button>
-          <button class="delete-post">🗑</button>
-          <button class="view-post">👁</button>
+    <!-- Hidden Add Forum Form -->
+    <div id="addForumContainer" class="add-forum-container">
+      <form id="addForumForm" class="add-forum-form">
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" required />
         </div>
-      </div>
-      <div class="post-content">
-        <img src="../images/running.jpg" alt="Running People" />
-        <p>The members inside are active in participating</p>
-        <div class="post-interactions">
-          <button class="like">👍</button>
-          <button class="dislike">👎</button>
-          <button class="share">🔗</button>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" required></textarea>
         </div>
-      </div>
+        <div class="form-group">
+          <label for="image_url">Image URL:</label>
+          <input type="text" id="image_url" name="image_url" />
+        </div>
+        <button type="submit">Add Forum</button>
+      </form>
     </div>
 
-    <div class="forum-post">
-      <div class="post-header">
-        <span class="post-title">Cycle Breakers</span>
-        <div class="post-actions">
-          <button class="edit-post">✎</button>
-          <button class="delete-post">🗑</button>
-          <button class="view-post">👁</button>
-        </div>
-      </div>
-      <div class="post-content">
-        <img src="../images/cycling.jpg" alt="Cycling Group" />
-        <p>This cycling group is amazing!</p>
-        <div class="post-interactions">
-          <button class="like">👍</button>
-          <button class="dislike">👎</button>
-          <button class="share">🔗</button>
-        </div>
-      </div>
-    </div>
+    <div id="forum-container"></div>
+    <!-- Container for forum posts -->
+
+    <script src="forum.js"></script>
   </body>
 </html>

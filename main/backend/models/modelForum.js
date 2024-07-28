@@ -1,10 +1,10 @@
 const sql = require("mssql");
-const dbConfig = require("../dbConfig");
+const { poolPromise } = require("../dbConfig");
 
 class Forum {
   static async getForums() {
     try {
-      const pool = await sql.connect(dbConfig);
+      const pool = await poolPromise;
       const result = await pool.request().query("SELECT * FROM Forums");
       return result.recordset;
     } catch (error) {
@@ -16,7 +16,7 @@ class Forum {
   static async createForum(newForumData) {
     try {
       const { title, description, image_url } = newForumData;
-      const pool = await sql.connect(dbConfig);
+      const pool = await poolPromise;
       const result = await pool
         .request()
         .input("title", sql.NVarChar, title)
@@ -25,7 +25,6 @@ class Forum {
         .query(
           "INSERT INTO Forums (title, description, image_url) VALUES (@title, @description, @image_url); SELECT SCOPE_IDENTITY() AS id"
         );
-      await pool.close();
       return result.recordset[0].id;
     } catch (error) {
       console.error("Error creating forum:", error.message);
@@ -36,7 +35,7 @@ class Forum {
   static async updateForum(forumId, updatedForumData) {
     try {
       const { title, description } = updatedForumData;
-      const pool = await sql.connect(dbConfig);
+      const pool = await poolPromise;
       const result = await pool
         .request()
         .input("id", sql.Int, forumId)
@@ -54,7 +53,7 @@ class Forum {
 
   static async deleteForum(forumId) {
     try {
-      const pool = await sql.connect(dbConfig);
+      const pool = await poolPromise;
       const result = await pool
         .request()
         .input("id", sql.Int, forumId)

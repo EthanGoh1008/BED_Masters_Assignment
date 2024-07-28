@@ -1,0 +1,159 @@
+body {
+  display: flex;
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f9;
+}
+
+.sidebar {
+  width: 220px;
+  background: #2c3e50;
+  color: white;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.sidebar ul li:hover,
+.sidebar ul .logout {
+  background: #34495e;
+}
+
+.sidebar ul .logout {
+  color: #e74c3c;
+  margin-top: 20px;
+}
+
+.main-content {
+  margin-left: 240px;
+  padding: 30px;
+  flex-grow: 1;
+  background: #ecf0f1;
+  min-height: 100vh;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 15px 25px;
+  border-bottom: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header .welcome h1 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 24px;
+  color: #2c3e50;
+}
+
+.header .user-info {
+  display: flex;
+  align-items: center;
+}
+
+.header .user-info img {
+  margin-left: 10px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid #2c3e50;
+}
+
+.manage-events {
+  background: white;
+  padding: 25px;
+  border-radius: 5px;
+  margin-top: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.manage-events h2 {
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.manage-events .add-event {
+  display: inline-block;
+  background: #00c0ef;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s;
+  float: right;
+}
+
+.manage-events .add-event:hover {
+  background: #008bb5;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  clear: both; /* Ensure table respects floating elements */
+}
+
+th,
+td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background: #2c3e50;
+  color: white;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.edit,
+.delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #2c3e50;
+  transition: color 0.3s;
+}
+
+.edit:hover,
+.delete:hover {
+  color: #e74c3c;
+}
