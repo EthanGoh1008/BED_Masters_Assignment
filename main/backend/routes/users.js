@@ -6,7 +6,6 @@ const { auth, authorizeRoles } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
-
 // Register a new user
 router.post("/register", async (req, res) => {
   const { username, email, password, role } = req.body;
@@ -82,7 +81,7 @@ router.post("/login", async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.status(200).json({ token });
+    res.status(200).json({ token, user: payload });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
@@ -130,17 +129,15 @@ router.post("/admin-login", async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.status(200).json({ token });
+    res.status(200).json({ token, user: payload });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
   }
 });
 
-
-
 // Other routes (login, get user by ID, update user, delete user) go here...
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const pool = await poolPromise;
     const result = await pool
@@ -176,7 +173,9 @@ router.get("/:id", async (req, res) => {
 });
 
 // Update user
-router.put("/users/:id", async (req, res) => {
+router.put("/put/:id",auth, async (req, res) => {
+  console.log(`PUT request received for user ID: ${req.params.id}`);
+  console.log("Request Body:", req.body);
   const { id } = req.params;
   const { username, email, password, role } = req.body;
 
@@ -215,7 +214,7 @@ router.put("/users/:id", async (req, res) => {
 });
 
 // Get user by ID for profile
-router.get("/profile/:userId", async (req, res) => {
+router.get("/profile/:userId",auth, async (req, res) => {
   const { userId } = req.params;
 
   try {
@@ -238,7 +237,7 @@ router.get("/profile/:userId", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id",auth, async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -275,7 +274,7 @@ router.put("/role/:id", async (req, res) => {
   }
 });
 
-router.put("/profile/:userId", async (req, res) => {
+router.put("/profile/:userId",auth, async (req, res) => {
   const { userId } = req.params;
   const { aboutMyself, preferredEvent } = req.body;
 
@@ -317,14 +316,10 @@ router.put("/profile/:userId", async (req, res) => {
   }
 });
 
-
-
 // Protecting a route with the auth middleware
 router.get("/protected-route", auth, (req, res) => {
   res.send("This is a protected route");
 });
-
-
 
 // Export the router
 module.exports = router;

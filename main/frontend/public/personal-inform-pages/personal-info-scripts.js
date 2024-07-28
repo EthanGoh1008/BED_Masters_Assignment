@@ -1,5 +1,11 @@
 document.addEventListener("DOMContentLoaded", async function () {
-  const userId = 2013; // Use a fixed user ID for testing
+  const userId = localStorage.getItem("userId"); // Get the userId from local storage
+
+  if (!userId) {
+    alert("User not logged in");
+    window.location.href = "../signin/signin.html"; // Redirect to login page if userId is not found
+    return;
+  }
 
   try {
     const response = await fetch(
@@ -8,6 +14,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Include the token in the headers
         },
       }
     );
@@ -45,6 +52,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`, // Include the token in the headers
             },
             body: JSON.stringify({ aboutMyself, preferredEvent }),
           }

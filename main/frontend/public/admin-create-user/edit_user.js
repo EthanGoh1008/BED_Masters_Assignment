@@ -27,17 +27,28 @@ document.addEventListener("DOMContentLoaded", function () {
     const userData = {
       username: formData.get("username"),
       email: formData.get("email"),
-      password: formData.get("password"), // This can be empty if the user doesn't want to change the password
+      password: formData.get("password"),
       role: formData.get("role"),
     };
 
+    console.log("Request URL:", `http://localhost:3000/api/users/${userId}`);
+    console.log("Request Body:", JSON.stringify(userData));
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("No token found, authorization denied");
+      return;
+    }
+
     try {
       const response = await fetch(
-        `http://localhost:3000/api/users/${userId}`, // Corrected here
+        `http://localhost:3000/api/users/put/${userId}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
           },
           body: JSON.stringify(userData),
         }
@@ -51,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
       alert(result.msg);
 
       // Redirect to manage users page after update
-      window.location.href = "manage_users.html";
+      window.location.href = "admin-create.html";
     } catch (error) {
       console.error("Error:", error);
       alert("Error updating user");
