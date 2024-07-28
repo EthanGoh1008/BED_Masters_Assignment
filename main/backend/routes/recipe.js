@@ -1,10 +1,10 @@
 const express = require("express");
 const path = require("path");
-const recipesController = require("./controllers/recipesController");
+const recipesController = require("../controllers/recipesController");
 const sql = require("mssql"); // Assuming you've installed mssql
-const dbConfig = require("./dbConfig");
+const dbConfig = require("../dbConfig");
 const bodyParser = require("body-parser"); // Import body-parser
-const validateRecipe = require("./middlewares/validateRecipe");
+const validateRecipe = require("../middlewares/validateRecipe");
 
 const app = express();
 const port = process.env.PORT || 3000; // Use environment variable or default ports
